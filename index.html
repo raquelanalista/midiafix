@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>MIDIAFIX — Índice do Projeto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<style>
+  body { background: var(--mx-grafite-deeper); min-height: 100vh; }
+  .hub { max-width: 920px; margin: 0 auto; padding: 96px 40px; }
+  .hub-head { margin-bottom: 56px; }
+  .hub-logo { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--mx-white); }
+  .hub-logo em { font-style: normal; color: var(--mx-red); }
+  .hub-head p { margin-top: 12px; color: var(--mx-gray-300); font-size: 14px; }
+  .hub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 680px) { .hub-grid { grid-template-columns: 1fr; } }
+  .hub-card {
+    display: block;
+    padding: 28px 30px;
+    background: var(--mx-surface-4);
+    border: 1px solid var(--mx-border-strong);
+    border-left: 3px solid var(--mx-red);
+    border-radius: var(--radius-md);
+    transition: border-color var(--ease-mid), background var(--ease-mid);
+  }
+  .hub-card:hover { background: var(--mx-surface-5); border-left-color: var(--mx-red); }
+  .hub-card .id { font-family: var(--font-mono); font-size: 11px; color: var(--mx-red); letter-spacing: 0.06em; }
+  .hub-card h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--mx-white); margin: 8px 0 6px; letter-spacing: -0.01em; }
+  .hub-card p { font-size: 13px; color: var(--mx-gray-300); line-height: 1.6; }
+</style>
+</head>
+<body>
+  <div class="hub">
+    <div class="hub-head">
+      <span class="hub-logo">MIDIA<em>FIX</em></span>
+      <p>Índice do projeto — preview local para validação visual.</p>
+    </div>
+    <div class="hub-grid">
+      <a class="hub-card" href="midiafix-comunicacao-visual.html">
+        <span class="id">PÁGINA</span>
+        <h3>Comunicação Visual Corporativa</h3>
+        <p>Landing principal: hero, problema, solução, diferenciais, segmentos, cases, processo, FAQ e CTA.</p>
+      </a>
+      <a class="hub-card" href="midiafix-hero-final.html">
+        <span class="id">HERO</span>
+        <h3>Hero Canônico</h3>
+        <p>Hero premium consolidado (.mx-hero) com overlay multi-camada, métricas fundidas e callout.</p>
+      </a>
+      <a class="hub-card" href="midiafix-design-system.html">
+        <span class="id">SISTEMA</span>
+        <h3>Design System & Component Library</h3>
+        <p>Tokens, tipografia, botões, cards, hero, KPI, processo, FAQ, CTA e templates.</p>
+      </a>
+      <a class="hub-card" href="midiafix-seo-geo-arquitetura.html">
+        <span class="id">DOC</span>
+        <h3>Arquitetura SEO / GEO</h3>
+        <p>Hierarquia de URLs, keywords, clusters, schema e roadmap de conteúdo.</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

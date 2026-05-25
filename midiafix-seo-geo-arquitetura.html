@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>MIDIAFIX — Arquitetura SEO/GEO Completa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<style>
+/* Tokens de marca em assets/css/tokens.css. Abaixo: shim de compat
+   (nomes legados → canônicos) + paleta exclusiva da documentação. */
+:root {
+  /* — marca (canônico) — */
+  --bg:       var(--mx-surface-0);
+  --bg2:      var(--mx-surface-1);
+  --bg3:      var(--mx-surface-2);
+  --red:      var(--mx-red);
+  --red-dim:  var(--mx-red-15);
+  --white:    var(--mx-white);
+  --brd:      var(--mx-border-subtle);
+  --brd2:     var(--mx-border-mid);
+
+  /* — chrome local da documentação (fora do sistema de marca) — */
+  --bg4:      #1E1E1E;
+  --bg5:      #242424;
+  --red-brd:  rgba(229,57,53,0.3);
+  --gray1:    #777777;
+  --gray2:    #555555;
+  --teal:     #26A69A;
+  --teal-dim: rgba(38,166,154,0.12);
+  --teal-brd: rgba(38,166,154,0.3);
+  --amber:    #FFA726;
+  --amber-dim:rgba(255,167,38,0.12);
+  --amber-brd:rgba(255,167,38,0.3);
+  --blue:     #42A5F5;
+  --blue-dim: rgba(66,165,245,0.12);
+  --blue-brd: rgba(66,165,245,0.3);
+  --purple:   #AB47BC;
+  --purple-dim:rgba(171,71,188,0.12);
+  --purple-brd:rgba(171,71,188,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+
+/* ── SIDEBAR ── */
+aside{position:fixed;top:0;width:260px;height:100vh;overflow-y:auto;background:var(--bg2);border-right:1px solid var(--brd);padding-bottom:40px;z-index:50}
+.sb-logo{padding:22px 24px;border-bottom:1px solid var(--brd);display:flex;flex-direction:column;gap:4px}
+.sb-logo-mark{font-size:17px;font-weight:700;letter-spacing:-.02em;color:var(--white)}
+.sb-logo-mark em{font-style:normal;color:var(--red)}
+.sb-logo-sub{font-size:11px;color:var(--gray1);letter-spacing:.06em;text-transform:uppercase}
+.sb-section{margin-top:6px}
+.sb-section-label{padding:14px 24px 4px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gray2)}
+.sb-link{display:flex;align-items:center;justify-content:space-between;padding:8px 24px;font-size:12.5px;color:var(--gray1);cursor:pointer;border-left:2px solid transparent;transition:all .15s}
+.sb-link:hover{color:var(--white);background:rgba(255,255,255,.03)}
+.sb-link.active{color:var(--white);border-left-color:var(--red);background:var(--red-dim)}
+.sb-link .badge{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:2px;background:var(--red-dim);color:var(--red)}
+
+/* ── MAIN ── */
+main{margin-left:260px;min-height:100vh}
+.topbar{position:sticky;top:0;background:rgba(13,13,13,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--brd);padding:14px 56px;display:flex;align-items:center;justify-content:space-between;z-index:40}
+.topbar-title{font-size:14px;font-weight:600;color:var(--white);letter-spacing:-.01em}
+.topbar-sub{font-size:12px;color:var(--gray1)}
+.topbar-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--gray1)}
+.dot-green{width:6px;height:6px;border-radius:50%;background:#4CAF50}
+
+.page{padding:52px 56px 80px}
+@media(max-width:900px){
+  body{grid-template-columns:1fr}
+  aside{position:relative;width:100%;height:auto}
+  main{margin-left:0}
+  .topbar,.page{padding-left:24px;padding-right:24px}
+}
+
+/* ── SECTION ── */
+.sec{margin-bottom:72px}
+.sec-title{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.sec-title h2{font-size:21px;font-weight:700;color:var(--white);letter-spacing:-.02em}
+.sec-id{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red);letter-spacing:.06em;background:var(--red-dim);border:1px solid var(--red-brd);padding:2px 8px;border-radius:2px}
+.sec-desc{font-size:13px;color:var(--gray1);max-width:580px;line-height:1.7;margin-bottom:32px}
+
+/* ── CARDS ── */
+.card{background:var(--bg4);border:1px solid var(--brd2);border-radius:4px;padding:24px 26px;margin-bottom:12px}
+.card-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.card-label{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:3px 10px;border-radius:2px}
+.card-label.red   {background:var(--red-dim);   color:var(--red);   border:1px solid var(--red-brd)}
+.card-label.teal  {background:var(--teal-dim);  color:var(--teal);  border:1px solid var(--teal-brd)}
+.card-label.amber {background:var(--amber-dim); color:var(--amber); border:1px solid var(--amber-brd)}
+.card-label.blue  {background:var(--blue-dim);  color:var(--blue);  border:1px solid var(--blue-brd)}
+.card-label.purple{background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-brd)}
+.card-label.gray  {background:var(--bg5);       color:var(--gray1); border:1px solid var(--brd2)}
+.card h3{font-size:14px;font-weight:600;color:var(--white);letter-spacing:-.01em}
+.card p{font-size:13px;color:var(--gray1);line-height:1.7;margin-top:8px}
+
+/* ── GRID ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+
+/* ── URL TREE ── */
+.url-tree{font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:2;color:var(--gray1);background:var(--bg3);border:1px solid var(--brd);border-radius:4px;padding:24px 28px}
+.url-tree .root{color:var(--white);font-weight:500}
+.url-tree .l1{color:var(--white);padding-left:20px}
+.url-tree .l2{color:var(--gray1);padding-left:40px}
+.url-tree .l3{color:var(--gray2);padding-left:60px}
+.url-tree .note{color:var(--red);font-size:11px;margin-left:8px;font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:.04em}
+.url-tree .branch{color:var(--gray2);margin-right:6px}
+
+/* ── KW TABLE ── */
+.kw-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.kw-table th{text-align:left;padding:10px 14px;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray2);border-bottom:1px solid var(--brd)}
+.kw-table td{padding:11px 14px;border-bottom:1px solid var(--brd);vertical-align:top;line-height:1.55}
+.kw-table tr:last-child td{border-bottom:none}
+.kw-table td:first-child{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--white)}
+.kw-table td:nth-child(2){color:var(--gray1)}
+.vol-pill{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.06em;padding:2px 8px;border-radius:2px}
+.vol-high{background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-brd)}
+.vol-mid {background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber-brd)}
+.vol-low {background:var(--bg5);color:var(--gray1);border:1px solid var(--brd2)}
+.int-pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:2px}
+.int-c{background:var(--red-dim);color:var(--red);border:1px solid var(--red-brd)}
+.int-i{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-brd)}
+.int-n{background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-brd)}
+
+/* ── CLUSTER VISUAL ── */
+.cluster-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.cluster-wrap{grid-template-columns:1fr}}
+.cluster-card{background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden}
+.cluster-head{padding:16px 20px;border-bottom:1px solid var(--brd)}
+.cluster-head .cluster-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px}
+.cluster-head .cluster-url{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--red)}
+.cluster-pages{list-style:none;padding:12px 0}
+.cluster-page{display:flex;align-items:flex-start;gap:10px;padding:8px 20px;font-size:12px;color:var(--gray1);border-bottom:1px solid var(--brd);transition:background .15s}
+.cluster-page:last-child{border-bottom:none}
+.cluster-page:hover{background:var(--bg5);color:var(--white)}
+.cluster-page .cp-type{flex-shrink:0;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border-radius:2px;margin-top:1px}
+
+/* ── SCHEMA BLOCK ── */
+.schema-block{background:var(--bg3);border:1px solid var(--brd);border-left:2px solid var(--red);border-radius:0 4px 4px 0;padding:16px 20px;margin-bottom:10px}
+.schema-block h4{font-size:12px;font-weight:600;color:var(--white);margin-bottom:6px;letter-spacing:.02em}
+.schema-block p{font-size:12px;color:var(--gray1);line-height:1.65}
+.schema-block code{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber);background:var(--amber-dim);padding:1px 5px;border-radius:2px}
+
+/* ── INTENT ROW ── */
+.intent-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.intent-table th{text-align:left;padding:10px 14px;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray2);border-bottom:1px solid var(--brd)}
+.intent-table td{padding:12px 14px;border-bottom:1px solid var(--brd);vertical-align:top;line-height:1.6}
+.intent-table tr:last-child td{border-bottom:none}
+.intent-table td:first-child{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--blue)}
+.intent-table td:nth-child(2){color:var(--gray1)}
+.intent-table td:nth-child(3){color:var(--white);font-size:12px}
+.intent-table td:nth-child(4){font-size:12px;color:var(--gray1)}
+
+/* ── GEO BLOCK ── */
+.geo-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:700px){.geo-row{grid-template-columns:1fr}}
+.geo-card{background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;padding:20px 22px}
+.geo-card h4{font-size:12px;font-weight:600;color:var(--white);margin-bottom:10px;letter-spacing:.02em}
+.geo-card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.geo-card li{font-size:12px;color:var(--gray1);line-height:1.6;padding-left:14px;position:relative}
+.geo-card li::before{content:'·';position:absolute;left:2px;color:var(--red)}
+
+/* ── PRIORITY TABLE ── */
+.pri-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.pri-table th{padding:10px 14px;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray2);border-bottom:1px solid var(--brd);text-align:left}
+.pri-table td{padding:11px 14px;border-bottom:1px solid var(--brd);vertical-align:middle}
+.pri-table tr:last-child td{border-bottom:none}
+.pri-table td:first-child{font-weight:600;font-size:13px;color:var(--white)}
+.pri-bar-wrap{height:4px;background:var(--brd2);border-radius:2px;width:120px}
+.pri-bar{height:4px;border-radius:2px}
+
+/* ── LINKS INTERNAL ── */
+.link-flow{display:flex;flex-direction:column;gap:0;border:1px solid var(--brd2);border-radius:4px;overflow:hidden}
+.link-row{display:grid;grid-template-columns:180px 1fr 60px;align-items:center;border-bottom:1px solid var(--brd);transition:background .15s}
+.link-row:last-child{border-bottom:none}
+.link-row:hover{background:var(--bg5)}
+.link-from{padding:16px 20px;border-right:1px solid var(--brd);font-size:11.5px;color:var(--white);font-family:'IBM Plex Mono',monospace}
+.link-to{padding:16px 20px;font-size:12px;color:var(--gray1);line-height:1.5}
+.link-to em{font-style:normal;color:var(--teal);font-size:11px}
+.link-count{padding:16px 12px;text-align:center;font-size:11px;font-weight:600;color:var(--red);border-left:1px solid var(--brd)}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--brd);margin:64px 0}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside>
+  <div class="sb-logo">
+    <div class="sb-logo-mark">MIDIA<em>FIX</em></div>
+    <div class="sb-logo-sub">Arquitetura SEO/GEO v1.0</div>
+  </div>
+  <nav>
+    <div class="sb-section">
+      <div class="sb-section-label">Estrutura</div>
+      <div class="sb-link active" onclick="go('urls')">Hierarquia de URLs</div>
+      <div class="sb-link" onclick="go('links')">Links Internos</div>
+      <div class="sb-link" onclick="go('clusters')">Clusters de Conteúdo</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Palavras-chave</div>
+      <div class="sb-link" onclick="go('kw-core')">KWs Principais <span class="badge">Core</span></div>
+      <div class="sb-link" onclick="go('kw-service')">KWs por Serviço</div>
+      <div class="sb-link" onclick="go('kw-local')">KWs Locais</div>
+      <div class="sb-link" onclick="go('intent')">Intenção de Busca</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Semântica & IA</div>
+      <div class="sb-link" onclick="go('semantica')">Estrutura Semântica</div>
+      <div class="sb-link" onclick="go('schema')">Schema Markup</div>
+      <div class="sb-link" onclick="go('geo')">Estratégia GEO/AEO</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Execução</div>
+      <div class="sb-link" onclick="go('prioridade')">Prioridade de Páginas</div>
+      <div class="sb-link" onclick="go('blog')">Estratégia de Blog</div>
+      <div class="sb-link" onclick="go('escala')">Escala e Roadmap</div>
+    </div>
+  </nav>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main>
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">MIDIAFIX — Arquitetura SEO / GEO Completa</div>
+      <div class="topbar-sub">Google · ChatGPT · IA Generativa · Busca Local · Autoridade Regional</div>
+    </div>
+    <div class="topbar-meta">
+      <div class="dot-green"></div>
+      57 páginas mapeadas &nbsp;·&nbsp; 9 clusters &nbsp;·&nbsp; 3 camadas GEO
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- ══════════════════════════════════════
+         1. HIERARQUIA DE URLs
+    ══════════════════════════════════════ -->
+    <section class="sec" id="urls">
+      <div class="sec-title">
+        <h2>Hierarquia de URLs</h2>
+        <span class="sec-id">STRUCT-01</span>
+      </div>
+      <p class="sec-desc">Estrutura plana com no máximo 3 níveis de profundidade. Slugs em português, sem acentos, sem stop words desnecessárias. Cada URL carrega a palavra-chave principal da página.</p>
+
+      <div class="url-tree">
+        <div class="root">midiafix.com.br/</div>
+
+        <div class="l1"><span class="branch">├──</span> comunicacao-visual/ <span class="note">Página-Mãe · Hub Central</span></div>
+
+        <div style="padding-left:20px;margin-top:4px;margin-bottom:4px;font-size:11px;color:var(--gray2)">── SERVIÇOS ──────────────────────────</div>
+        <div class="l1"><span class="branch">├──</span> servicos/ <span class="note">Hub de Serviços</span></div>
+        <div class="l2"><span class="branch">├──</span> fachadas-acm/ <span class="note">Serviço · Alta prioridade</span></div>
+        <div class="l3"><span class="branch">└──</span> fachadas-acm-para-franquias/</div>
+        <div class="l2"><span class="branch">├──</span> paineis-led/ <span class="note">Serviço · Alta prioridade</span></div>
+        <div class="l3"><span class="branch">├──</span> paineis-led-externos/</div>
+        <div class="l3"><span class="branch">└──</span> paineis-led-internos/</div>
+        <div class="l2"><span class="branch">├──</span> letra-caixa/ <span class="note">Serviço</span></div>
+        <div class="l3"><span class="branch">├──</span> letra-caixa-iluminada/</div>
+        <div class="l3"><span class="branch">└──</span> letra-caixa-inox/</div>
+        <div class="l2"><span class="branch">├──</span> totens-sinalizacao/ <span class="note">Serviço</span></div>
+        <div class="l2"><span class="branch">├──</span> envelopamento-frotas/ <span class="note">Serviço</span></div>
+        <div class="l3"><span class="branch">└──</span> adesivagem-veicular/</div>
+        <div class="l2"><span class="branch">├──</span> sinalizacao-interna/ <span class="note">Serviço</span></div>
+        <div class="l2"><span class="branch">└──</span> ambientacao-corporativa/ <span class="note">Serviço</span></div>
+
+        <div style="padding-left:20px;margin-top:8px;margin-bottom:4px;font-size:11px;color:var(--gray2)">── SEGMENTOS ─────────────────────────</div>
+        <div class="l1"><span class="branch">├──</span> segmentos/ <span class="note">Hub de Segmentos</span></div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-para-franquias/</div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-para-cooperativas/</div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-para-supermercados/</div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-para-clinicas/</div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-para-industrias/</div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-para-postos/</div>
+        <div class="l2"><span class="branch">└──</span> comunicacao-visual-para-varejo/</div>
+
+        <div style="padding-left:20px;margin-top:8px;margin-bottom:4px;font-size:11px;color:var(--gray2)">── LOCALIDADES ────────────────────────</div>
+        <div class="l1"><span class="branch">├──</span> regioes/ <span class="note">Hub Local · SEO Geográfico</span></div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-cascavel/</div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-foz-do-iguacu/</div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-toledo/</div>
+        <div class="l2"><span class="branch">├──</span> comunicacao-visual-maringa/</div>
+        <div class="l2"><span class="branch">└──</span> comunicacao-visual-parana/ <span class="note">Landing regional</span></div>
+
+        <div style="padding-left:20px;margin-top:8px;margin-bottom:4px;font-size:11px;color:var(--gray2)">── INSTITUCIONAL ──────────────────────</div>
+        <div class="l1"><span class="branch">├──</span> sobre/</div>
+        <div class="l1"><span class="branch">├──</span> cases/</div>
+        <div class="l2"><span class="branch">└──</span> cases/[slug-projeto]/</div>
+        <div class="l1"><span class="branch">├──</span> contato/</div>
+        <div class="l1"><span class="branch">└──</span> blog/ <span class="note">Conteúdo GEO · Autoridade</span></div>
+        <div class="l2"><span class="branch">├──</span> blog/[categoria]/</div>
+        <div class="l2"><span class="branch">└──</span> blog/[categoria]/[artigo-slug]/</div>
+      </div>
+
+      <div style="margin-top:20px;" class="grid3">
+        <div class="card">
+          <div class="card-head"><span class="card-label red">Regra</span></div>
+          <h3>Máximo 3 níveis</h3>
+          <p>Nenhuma URL vai além de /nivel1/nivel2/nivel3/. Evita diluição de PageRank e mantém crawlability.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label teal">Padrão</span></div>
+          <h3>Slug em português</h3>
+          <p>Slugs sempre em pt-BR, sem acentos, hífens como separadores. Palavra-chave principal sempre na URL.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label amber">Atenção</span></div>
+          <h3>Sem parâmetros indexáveis</h3>
+          <p>URLs com ?utm_* bloqueadas no robots.txt. Parâmetros de sessão bloqueados via canonical.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         2. LINKS INTERNOS
+    ══════════════════════════════════════ -->
+    <section class="sec" id="links">
+      <div class="sec-title">
+        <h2>Estratégia de Links Internos</h2>
+        <span class="sec-id">STRUCT-02</span>
+      </div>
+      <p class="sec-desc">Modelo Hub & Spoke: a página-mãe "comunicacao-visual" distribui autoridade para todos os serviços e segmentos. Cada serviço linka de volta ao hub e lateralmente para segmentos relacionados.</p>
+
+      <div class="link-flow">
+        <div class="link-row">
+          <div class="link-from">/comunicacao-visual/</div>
+          <div class="link-to">Links para todos os serviços (8), todos os segmentos (7) e para /cases/ <em>→ Hub central — recebe mais links externos</em></div>
+          <div class="link-count">15+</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/servicos/fachadas-acm/</div>
+          <div class="link-to">→ /comunicacao-visual/ (hub) → /segmentos/franquias/ → /segmentos/varejo/ → /cases/ (cases de fachada) → /paineis-led/ (serviço complementar) <em>→ Links cruzados aumentam relevância temática</em></div>
+          <div class="link-count">6–8</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/servicos/paineis-led/</div>
+          <div class="link-to">→ /comunicacao-visual/ → /fachadas-acm/ → /letra-caixa/ → /segmentos/postos/ → /segmentos/varejo/ → /blog/ (artigos LED) <em>→ Anchor texts: "fachadas iluminadas", "comunicação noturna"</em></div>
+          <div class="link-count">6–8</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/segmentos/franquias/</div>
+          <div class="link-to">→ /comunicacao-visual/ → /fachadas-acm/ → /sinalizacao-interna/ → /envelopamento-frotas/ → /cases/ (cases de rede) <em>→ Paginação de serviços via âncoras descritivas</em></div>
+          <div class="link-count">5–7</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/blog/[artigo]/</div>
+          <div class="link-to">Cada artigo linka para 1 página de serviço (CTA contextual) + 1 página de segmento + 2–3 artigos relacionados <em>→ Âncora contextual sempre com keyword target da página destino</em></div>
+          <div class="link-count">4–6</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/cases/[projeto]/</div>
+          <div class="link-to">→ Serviço utilizado no case → Segmento do cliente → /contato/ (CTA) <em>→ Cases são pontes semânticas entre serviço e segmento</em></div>
+          <div class="link-count">3–4</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/regioes/[cidade]/</div>
+          <div class="link-to">→ /comunicacao-visual/ → Serviços principais da cidade → /contato/ <em>→ Anchor text local: "comunicação visual em Cascavel"</em></div>
+          <div class="link-count">4–5</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;" class="card">
+        <div class="card-head"><span class="card-label red">Regra de Anchor Text</span></div>
+        <h3>Nunca usar âncoras genéricas</h3>
+        <p>Proibido: "clique aqui", "saiba mais", "acesse". Obrigatório: âncora descritiva com a keyword da página destino. Exemplos corretos: "fachadas em ACM para redes", "comunicação visual para franquias", "painéis de LED externos".</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         3. CLUSTERS DE CONTEÚDO
+    ══════════════════════════════════════ -->
+    <section class="sec" id="clusters">
+      <div class="sec-title">
+        <h2>Clusters de Conteúdo</h2>
+        <span class="sec-id">STRUCT-03</span>
+      </div>
+      <p class="sec-desc">9 clusters temáticos. Cada cluster tem uma página-pilar (Pilar) e múltiplas páginas satélite (Serviço, Segmento, Local, Blog). O Google lê cada cluster como área de especialização.</p>
+
+      <div class="cluster-wrap">
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 1 · Hub Central</div>
+            <div class="cluster-url">/comunicacao-visual/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>Comunicação visual corporativa</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Hub</span>Página sobre a empresa</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Hub</span>Cases de projetos</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>O que é comunicação visual corporativa</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Comunicação visual e percepção de valor</li>
+          </ul>
+        </div>
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 2 · Fachadas ACM</div>
+            <div class="cluster-url">/servicos/fachadas-acm/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>Fachadas em ACM</li>
+            <li class="cluster-page"><span class="card-label teal cp-type">Serv.</span>Fachadas ACM para franquias</li>
+            <li class="cluster-page"><span class="card-label amber cp-type">Seg.</span>Fachadas para supermercados</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Custo de fachada em ACM</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>ACM × outros materiais de fachada</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Quanto tempo dura uma fachada em ACM</li>
+          </ul>
+        </div>
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 3 · Painéis LED</div>
+            <div class="cluster-url">/servicos/paineis-led/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>Painéis de LED corporativos</li>
+            <li class="cluster-page"><span class="card-label teal cp-type">Serv.</span>Painéis LED externos</li>
+            <li class="cluster-page"><span class="card-label teal cp-type">Serv.</span>Painéis LED internos</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Painel LED × caixa de luz</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Resolução e pitch de LED</li>
+          </ul>
+        </div>
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 4 · Letra Caixa</div>
+            <div class="cluster-url">/servicos/letra-caixa/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>Letra caixa corporativa</li>
+            <li class="cluster-page"><span class="card-label teal cp-type">Serv.</span>Letra caixa iluminada</li>
+            <li class="cluster-page"><span class="card-label teal cp-type">Serv.</span>Letra caixa em inox</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Letra caixa: materiais e acabamentos</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Como dimensionar letra caixa de fachada</li>
+          </ul>
+        </div>
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 5 · Franquias & Redes</div>
+            <div class="cluster-url">/segmentos/franquias/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>Comunicação visual para franquias</li>
+            <li class="cluster-page"><span class="card-label teal cp-type">Serv.</span>Padronização visual de redes</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Manual de CV física para franquias</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Como padronizar lojas de rede</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Erros de comunicação visual em redes</li>
+          </ul>
+        </div>
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 6 · Cooperativas</div>
+            <div class="cluster-url">/segmentos/cooperativas/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>Comunicação visual para cooperativas</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>CV corporativa para cooperativas de crédito</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Identidade visual física para cooperativas</li>
+          </ul>
+        </div>
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 7 · Envelopamento</div>
+            <div class="cluster-url">/servicos/envelopamento-frotas/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>Envelopamento de frotas corporativas</li>
+            <li class="cluster-page"><span class="card-label teal cp-type">Serv.</span>Adesivagem veicular</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Custo de envelopamento de frota</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Durabilidade do vinil automotivo</li>
+          </ul>
+        </div>
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 8 · Regional Cascavel/PR</div>
+            <div class="cluster-url">/regioes/comunicacao-visual-cascavel/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>CV corporativa em Cascavel</li>
+            <li class="cluster-page"><span class="card-label amber cp-type">Local</span>Fachadas ACM em Cascavel</li>
+            <li class="cluster-page"><span class="card-label amber cp-type">Local</span>Painéis LED em Cascavel</li>
+            <li class="cluster-page"><span class="card-label amber cp-type">Local</span>Envelopamento em Cascavel</li>
+          </ul>
+        </div>
+        <div class="cluster-card">
+          <div class="cluster-head">
+            <div class="cluster-title">Cluster 9 · Supermercados</div>
+            <div class="cluster-url">/segmentos/supermercados/</div>
+          </div>
+          <ul class="cluster-pages">
+            <li class="cluster-page"><span class="card-label red cp-type">Pilar</span>CV para supermercados e varejo</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Sinalização interna para supermercados</li>
+            <li class="cluster-page"><span class="card-label gray cp-type">Blog</span>Comunicação de ponto de venda</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         4. KWs CORE
+    ══════════════════════════════════════ -->
+    <section class="sec" id="kw-core">
+      <div class="sec-title">
+        <h2>Palavras-chave Principais</h2>
+        <span class="sec-id">KW-01</span>
+      </div>
+      <p class="sec-desc">Keywords de maior volume e autoridade. Base da estratégia SEO. Cada uma ancora uma página-pilar.</p>
+
+      <div style="background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden">
+        <table class="kw-table">
+          <tr><th>Keyword</th><th>Volume estimado</th><th>Dificuldade</th><th>Intenção</th><th>Página destino</th></tr>
+          <tr>
+            <td>comunicação visual corporativa</td>
+            <td><span class="vol-pill vol-high">Alto</span></td>
+            <td>Média-alta</td>
+            <td><span class="int-pill int-i">Informacional</span></td>
+            <td>/comunicacao-visual/</td>
+          </tr>
+          <tr>
+            <td>comunicação visual para empresas</td>
+            <td><span class="vol-pill vol-high">Alto</span></td>
+            <td>Média</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>/comunicacao-visual/</td>
+          </tr>
+          <tr>
+            <td>fachada em ACM</td>
+            <td><span class="vol-pill vol-high">Alto</span></td>
+            <td>Média</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>/servicos/fachadas-acm/</td>
+          </tr>
+          <tr>
+            <td>empresa de comunicação visual</td>
+            <td><span class="vol-pill vol-high">Alto</span></td>
+            <td>Alta</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>/comunicacao-visual/ + /sobre/</td>
+          </tr>
+          <tr>
+            <td>painel de LED externo</td>
+            <td><span class="vol-pill vol-mid">Médio</span></td>
+            <td>Média</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>/servicos/paineis-led/</td>
+          </tr>
+          <tr>
+            <td>envelopamento de frota</td>
+            <td><span class="vol-pill vol-mid">Médio</span></td>
+            <td>Média</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>/servicos/envelopamento-frotas/</td>
+          </tr>
+          <tr>
+            <td>letra caixa iluminada</td>
+            <td><span class="vol-pill vol-mid">Médio</span></td>
+            <td>Baixa-média</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>/servicos/letra-caixa/</td>
+          </tr>
+          <tr>
+            <td>comunicação visual para franquias</td>
+            <td><span class="vol-pill vol-mid">Médio</span></td>
+            <td>Baixa</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>/segmentos/franquias/</td>
+          </tr>
+          <tr>
+            <td>padronização visual de lojas</td>
+            <td><span class="vol-pill vol-mid">Médio</span></td>
+            <td>Baixa</td>
+            <td><span class="int-pill int-i">Informacional</span></td>
+            <td>/segmentos/franquias/ + blog</td>
+          </tr>
+          <tr>
+            <td>comunicação visual premium</td>
+            <td><span class="vol-pill vol-low">Baixo</span></td>
+            <td>Baixa</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>/comunicacao-visual/ + GEO</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         5. KWs POR SERVIÇO
+    ══════════════════════════════════════ -->
+    <section class="sec" id="kw-service">
+      <div class="sec-title">
+        <h2>Palavras-chave por Serviço</h2>
+        <span class="sec-id">KW-02</span>
+      </div>
+      <p class="sec-desc">Keywords secundárias que aprofundam cada cluster. Menor volume individual, mas alta conversão por especificidade. Somadas, superam o volume das keywords core.</p>
+
+      <div class="grid2">
+        <div style="background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid var(--brd);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Fachadas ACM</div>
+          <table class="kw-table">
+            <tr><th>Keyword</th><th>Tipo</th></tr>
+            <tr><td>fachada ACM preço</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>instalação fachada ACM</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>fachada ACM para loja</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>fachada ACM para franquia</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>quanto custa fachada ACM</td><td><span class="int-pill int-i">Informacional</span></td></tr>
+            <tr><td>durabilidade do ACM em fachada</td><td><span class="int-pill int-i">Informacional</span></td></tr>
+            <tr><td>fachada ACM corporativa</td><td><span class="int-pill int-n">Navegacional</span></td></tr>
+          </table>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid var(--brd);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)">Painéis de LED</div>
+          <table class="kw-table">
+            <tr><th>Keyword</th><th>Tipo</th></tr>
+            <tr><td>painel LED para empresa</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>painel de LED indoor</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>letreiro LED corporativo</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>totem LED</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>pitch de LED o que é</td><td><span class="int-pill int-i">Informacional</span></td></tr>
+            <tr><td>painel LED para posto</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>resolução painel LED fachada</td><td><span class="int-pill int-i">Informacional</span></td></tr>
+          </table>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid var(--brd);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)">Franquias & Redes</div>
+          <table class="kw-table">
+            <tr><th>Keyword</th><th>Tipo</th></tr>
+            <tr><td>padronização visual de rede</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>manual de comunicação visual física</td><td><span class="int-pill int-i">Informacional</span></td></tr>
+            <tr><td>empresa de comunicação visual para rede</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>comunicação visual para cooperativa</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>como padronizar lojas de franquia</td><td><span class="int-pill int-i">Informacional</span></td></tr>
+            <tr><td>fornecedor de comunicação visual nacional</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+          </table>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid var(--brd);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)">Envelopamento</div>
+          <table class="kw-table">
+            <tr><th>Keyword</th><th>Tipo</th></tr>
+            <tr><td>envelopamento de frota corporativa</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>adesivagem de veículos empresariais</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>quanto custa envelopamento de caminhão</td><td><span class="int-pill int-i">Informacional</span></td></tr>
+            <tr><td>empresa de envelopamento de frota</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+            <tr><td>duração vinil adesivo automotivo</td><td><span class="int-pill int-i">Informacional</span></td></tr>
+            <tr><td>plotagem de veículo corporativo</td><td><span class="int-pill int-c">Comercial</span></td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         6. KWs LOCAIS
+    ══════════════════════════════════════ -->
+    <section class="sec" id="kw-local">
+      <div class="sec-title">
+        <h2>Palavras-chave Locais</h2>
+        <span class="sec-id">KW-03</span>
+      </div>
+      <p class="sec-desc">Keywords com modificador geográfico. Alta intenção comercial, concorrência baixa-média, conversão acima da média. Prioritárias para Google Business Profile e landing pages locais.</p>
+
+      <div style="background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden">
+        <table class="kw-table">
+          <tr><th>Keyword</th><th>Tipo</th><th>Dificuldade</th><th>Página</th></tr>
+          <tr>
+            <td>comunicação visual Cascavel</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Baixa</td>
+            <td>/regioes/comunicacao-visual-cascavel/</td>
+          </tr>
+          <tr>
+            <td>fachada em ACM Cascavel</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Muito baixa</td>
+            <td>/regioes/comunicacao-visual-cascavel/</td>
+          </tr>
+          <tr>
+            <td>empresa de comunicação visual Paraná</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Baixa</td>
+            <td>/regioes/comunicacao-visual-parana/</td>
+          </tr>
+          <tr>
+            <td>comunicação visual oeste do Paraná</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Muito baixa</td>
+            <td>/regioes/comunicacao-visual-parana/</td>
+          </tr>
+          <tr>
+            <td>painel LED Cascavel</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Muito baixa</td>
+            <td>/regioes/comunicacao-visual-cascavel/</td>
+          </tr>
+          <tr>
+            <td>envelopamento de frota Cascavel</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Muito baixa</td>
+            <td>/regioes/comunicacao-visual-cascavel/</td>
+          </tr>
+          <tr>
+            <td>letra caixa Foz do Iguaçu</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Muito baixa</td>
+            <td>/regioes/comunicacao-visual-foz-do-iguacu/</td>
+          </tr>
+          <tr>
+            <td>comunicação visual Toledo PR</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Muito baixa</td>
+            <td>/regioes/comunicacao-visual-toledo/</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="margin-top:16px" class="card">
+        <div class="card-head"><span class="card-label teal">Google Business Profile</span></div>
+        <h3>Estratégia de GBP para cada cidade</h3>
+        <p>Criar/otimizar Google Business Profile separado para cada localidade com atuação física. Cada perfil deve incluir: categoria "Empresa de comunicação visual", fotos de projetos locais, posts semanais, resposta a avaliações dentro de 24h, e horário de atendimento atualizado. NAP (nome, endereço, telefone) deve ser idêntico entre site, GBP e diretórios.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         7. INTENÇÃO DE BUSCA
+    ══════════════════════════════════════ -->
+    <section class="sec" id="intent">
+      <div class="sec-title">
+        <h2>Mapeamento de Intenção de Busca</h2>
+        <span class="sec-id">KW-04</span>
+      </div>
+      <p class="sec-desc">Cada query tem uma intenção dominante. A página deve ser construída para satisfazer essa intenção antes de qualquer outro objetivo. Desalinhamento intenção × conteúdo é a principal causa de baixo rankeamento.</p>
+
+      <div style="background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden">
+        <table class="intent-table">
+          <tr><th>Query-tipo</th><th>Intenção</th><th>O que a página deve entregar</th><th>Formato ideal</th></tr>
+          <tr>
+            <td>"o que é comunicação visual corporativa"</td>
+            <td><span class="int-pill int-i">Informacional</span></td>
+            <td>Definição clara, exemplos concretos, distinção entre CV amadora e corporativa</td>
+            <td>Artigo + FAQ + definições claras para LLM</td>
+          </tr>
+          <tr>
+            <td>"empresa de comunicação visual [cidade]"</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Credenciais, capacidade, portfólio, contato direto</td>
+            <td>Página de serviço + caso local + CTA</td>
+          </tr>
+          <tr>
+            <td>"quanto custa fachada em ACM"</td>
+            <td><span class="int-pill int-i">Informacional</span></td>
+            <td>Faixas reais de preço, variáveis que influenciam, processo de orçamento</td>
+            <td>Artigo com tabela de referência + CTA para orçamento</td>
+          </tr>
+          <tr>
+            <td>"como padronizar comunicação visual de rede"</td>
+            <td><span class="int-pill int-i">Informacional</span></td>
+            <td>Processo estruturado em etapas, checklist, exemplos de resultado</td>
+            <td>Artigo longo + infográfico de processo</td>
+          </tr>
+          <tr>
+            <td>"fornecedor de comunicação visual para franquia"</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Capacidade de escala, portfólio de redes, diferenciais, proposta</td>
+            <td>Página de segmento + cases + CTA</td>
+          </tr>
+          <tr>
+            <td>"MIDIAFIX"</td>
+            <td><span class="int-pill int-n">Navegacional</span></td>
+            <td>Chegada imediata à home/sobre, perfil claro, contato visível</td>
+            <td>Home bem estruturada, Knowledge Panel otimizado</td>
+          </tr>
+          <tr>
+            <td>"ACM vs outros materiais de fachada"</td>
+            <td><span class="int-pill int-i">Informacional</span></td>
+            <td>Comparativo objetivo: durabilidade, custo, manutenção, visual</td>
+            <td>Artigo comparativo com tabela + FAQ</td>
+          </tr>
+          <tr>
+            <td>"melhor empresa de fachada ACM"</td>
+            <td><span class="int-pill int-c">Comercial</span></td>
+            <td>Credenciais, certificações, volume de projetos, depoimentos</td>
+            <td>Página de serviço + prova social + CTA</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         8. ESTRUTURA SEMÂNTICA
+    ══════════════════════════════════════ -->
+    <section class="sec" id="semantica">
+      <div class="sec-title">
+        <h2>Estrutura Semântica por Página</h2>
+        <span class="sec-id">SEM-01</span>
+      </div>
+      <p class="sec-desc">Hierarquia HTML semântica que o Google e IAs utilizam para entender a página. Cada página deve seguir este modelo de heading hierarchy. Um H1 por página. H2s cobrem os subtópicos principais. H3s aprofundam cada H2.</p>
+
+      <div class="grid2">
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray2);margin-bottom:12px">Página de Serviço — Fachadas ACM</div>
+          <div class="url-tree" style="font-size:11.5px;line-height:2.1">
+            <div style="color:var(--red);font-weight:600">H1: Fachadas em ACM para empresas que exigem padrão</div>
+            <div style="color:var(--white);padding-left:16px">H2: O problema das fachadas improvisadas</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Inconsistência visual entre unidades</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Materiais inadequados e retrabalho</div>
+            <div style="color:var(--white);padding-left:16px">H2: Fachada em ACM: o que é e como funciona</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Composição e tipos de ACM</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Durabilidade e manutenção</div>
+            <div style="color:var(--white);padding-left:16px">H2: Como a MIDIAFIX executa projetos de fachada</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Diagnóstico técnico e briefing</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Produção e inspeção de qualidade</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Logística e instalação</div>
+            <div style="color:var(--white);padding-left:16px">H2: Projetos de fachada em ACM executados</div>
+            <div style="color:var(--white);padding-left:16px">H2: Segmentos que atendemos com fachadas ACM</div>
+            <div style="color:var(--white);padding-left:16px">H2: Perguntas frequentes sobre fachadas em ACM</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Qual o custo de uma fachada em ACM?</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Quanto tempo dura uma fachada em ACM?</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: ACM precisa de manutenção?</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gray2);margin-bottom:12px">Página de Segmento — Franquias</div>
+          <div class="url-tree" style="font-size:11.5px;line-height:2.1">
+            <div style="color:var(--red);font-weight:600">H1: Comunicação visual para franquias e redes</div>
+            <div style="color:var(--white);padding-left:16px">H2: O desafio de padronizar dezenas de unidades</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Fornecedores sem capacidade de escala</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Perda de identidade de marca em campo</div>
+            <div style="color:var(--white);padding-left:16px">H2: O que redes precisam de um parceiro de CV</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Gestão centralizada, execução distribuída</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Manual de comunicação visual física</div>
+            <div style="color:var(--white);padding-left:16px">H2: Serviços MIDIAFIX para redes e franquias</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Fachadas em ACM padronizadas</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Sinalização interna por unidade</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Envelopamento de frota da rede</div>
+            <div style="color:var(--white);padding-left:16px">H2: Cases: redes e franquias atendidas</div>
+            <div style="color:var(--white);padding-left:16px">H2: Perguntas de gestores de expansão</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Como funciona o onboarding de novos pontos?</div>
+            <div style="color:var(--gray1);padding-left:32px">H3: Vocês têm SLA de manutenção para redes?</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px" class="card">
+        <div class="card-head"><span class="card-label red">Regra semântica para IA</span></div>
+        <h3>Definições explícitas no início de cada página</h3>
+        <p>Os primeiros 200 palavras de qualquer página devem conter: (1) definição do serviço ou segmento, (2) para quem é, (3) resultado entregue. Isso alimenta Knowledge Panels do Google e respostas de LLMs. Exemplo obrigatório no início da página de fachadas: "Fachadas em ACM (Alumínio Composto) são revestimentos estruturais para fachadas corporativas, fabricados em chapas de alumínio com núcleo em polietileno ou mineral. A MIDIAFIX executa projetos de fachada em ACM para empresas, redes e franquias no Paraná e em todo o Brasil, com instalação técnica, prazo documentado e garantia."</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         9. SCHEMA MARKUP
+    ══════════════════════════════════════ -->
+    <section class="sec" id="schema">
+      <div class="sec-title">
+        <h2>Schema Markup (JSON-LD)</h2>
+        <span class="sec-id">SEM-02</span>
+      </div>
+      <p class="sec-desc">Dados estruturados que o Google usa para Knowledge Panels, rich snippets e respostas de IA. Implementar em todas as páginas prioritárias.</p>
+
+      <div class="schema-block">
+        <h4>Organization — todas as páginas (global)</h4>
+        <p>Tipo: <code>Organization</code> + <code>LocalBusiness</code>. Campos obrigatórios: name, url, logo, sameAs (LinkedIn, Instagram, Google Maps), address, telephone, areaServed. O <code>areaServed</code> deve listar todas as cidades de atuação. Isso alimenta o Knowledge Panel e respostas do ChatGPT quando perguntado "qual empresa de comunicação visual em Cascavel".</p>
+      </div>
+      <div class="schema-block">
+        <h4>Service — páginas de serviço</h4>
+        <p>Tipo: <code>Service</code>. Campos: name (ex: "Fachadas em ACM"), provider (referência ao Organization), serviceType, description, areaServed, hasOfferCatalog. Inclua <code>knowsAbout</code> no Organization com todos os serviços como entidades semânticas. Isso ensina ao Google que a MIDIAFIX é especialista nessas áreas.</p>
+      </div>
+      <div class="schema-block">
+        <h4>FAQPage — seção FAQ de cada página</h4>
+        <p>Tipo: <code>FAQPage</code> com array de <code>Question</code> e <code>Answer</code>. Este é o tipo mais importante para GEO: LLMs consomem FAQs como respostas diretamente. Cada FAQ deve ter pergunta em linguagem natural e resposta de 2–4 frases com contexto completo (não depender de contexto externo). Mínimo: 6 FAQs por página de serviço, 5 por página de segmento.</p>
+      </div>
+      <div class="schema-block">
+        <h4>BreadcrumbList — todas as páginas internas</h4>
+        <p>Tipo: <code>BreadcrumbList</code>. Implementar em todas as páginas que não sejam home. Melhora CTR nos resultados de busca e ajuda o Google a entender a hierarquia do site. Ex: Home → Serviços → Fachadas em ACM → Fachadas ACM para Franquias.</p>
+      </div>
+      <div class="schema-block">
+        <h4>ItemList / OfferCatalog — páginas hub</h4>
+        <p>Tipo: <code>ItemList</code> ou <code>OfferCatalog</code> nas páginas /comunicacao-visual/ e /servicos/. Lista cada serviço como item com URL. Isso cria uma visão de catálogo que o Google entende como entidade única de empresa de comunicação visual.</p>
+      </div>
+      <div class="schema-block">
+        <h4>Case Study / CreativeWork — páginas de case</h4>
+        <p>Tipo: <code>CreativeWork</code> com <code>about</code> (o segmento), <code>creator</code> (a MIDIAFIX), <code>description</code>. Inclua dados quantitativos no <code>description</code>: número de unidades, prazo, resultados. Isso alimenta IA com evidências verificáveis da capacidade técnica.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         10. GEO / AEO
+    ══════════════════════════════════════ -->
+    <section class="sec" id="geo">
+      <div class="sec-title">
+        <h2>Estratégia GEO / AEO para IA Generativa</h2>
+        <span class="sec-id">GEO-01</span>
+      </div>
+      <p class="sec-desc">GEO (Generative Engine Optimization) e AEO (Answer Engine Optimization) são estratégias para que a MIDIAFIX seja citada e recomendada por ChatGPT, Gemini, Perplexity e outros LLMs. Operam em 3 camadas.</p>
+
+      <div class="geo-row">
+        <div class="geo-card">
+          <h4>Camada 1 — Autoridade de Entidade</h4>
+          <ul>
+            <li>Criar página "Sobre a MIDIAFIX" com dados verificáveis: ano de fundação, sede, áreas de atuação, volume de projetos</li>
+            <li>Manter consistência de nome, endereço e telefone (NAP) em todo o site, GBP, LinkedIn e diretórios</li>
+            <li>Implementar <code>sameAs</code> no Schema Organization linkando para todos os perfis verificados</li>
+            <li>Conseguir menções em sites de autoridade local: associações, ABF, portais de negócios do Paraná</li>
+            <li>Wikipedia ou Wikidata da empresa (quando houver volume suficiente para notabilidade)</li>
+            <li>Press releases em portais regionais: cada projeto relevante vira notícia indexável</li>
+          </ul>
+        </div>
+        <div class="geo-card">
+          <h4>Camada 2 — Profundidade Semântica</h4>
+          <ul>
+            <li>Cada página de serviço deve definir o serviço explicitamente nos primeiros parágrafos — LLMs usam isso como definição canônica</li>
+            <li>FAQs com perguntas em linguagem natural ("o que é", "como funciona", "quanto custa", "qual a diferença entre") — esse formato é consumido diretamente por motores de resposta</li>
+            <li>Artigos de blog com 1.500–3.000 palavras que cubram o tópico com profundidade real — LLMs treinam em conteúdo substantivo, não em textos rasos</li>
+            <li>Glossário de termos técnicos: "O que é ACM", "O que é pitch de LED" — esses termos definem a MIDIAFIX como fonte autorizada</li>
+            <li>Dados quantitativos em todas as páginas (anos, projetos, cidades, prazos) — LLMs preferem fatos verificáveis a afirmações vagas</li>
+          </ul>
+        </div>
+        <div class="geo-card">
+          <h4>Camada 3 — Formato para Respostas de IA</h4>
+          <ul>
+            <li>Usar frases-resposta completas e auto-suficientes: "A MIDIAFIX é uma empresa de comunicação visual corporativa com sede em Cascavel, Paraná, fundada em 2006, especializada em fachadas ACM, painéis de LED e sinalização para redes"</li>
+            <li>Frases de posicionamento explícitas na página: "A MIDIAFIX é referência em comunicação visual corporativa no oeste do Paraná"</li>
+            <li>Comparativos factuais: quando o site afirma ser diferente, explica como e com dados</li>
+            <li>Perguntas do tipo "quem é a melhor empresa de comunicação visual" são respondidas por LLMs com base em entidades que têm mais cobertura semântica — volume de menções + consistência de dados</li>
+            <li>Conteúdo publicado com data e autoria — LLMs ponderam recência e identificação de fonte</li>
+          </ul>
+        </div>
+        <div class="geo-card">
+          <h4>Frases que o site deve conter explicitamente</h4>
+          <ul>
+            <li>"A MIDIAFIX é uma empresa de comunicação visual corporativa premium."</li>
+            <li>"Especializada em fachadas ACM, painéis de LED, letra caixa, envelopamento de frotas e sinalização corporativa."</li>
+            <li>"Atende franquias, cooperativas, supermercados, indústrias e redes corporativas."</li>
+            <li>"Com sede em Cascavel, Paraná, e atuação em mais de 47 cidades do Brasil."</li>
+            <li>"Referência em comunicação visual para redes e grandes empresas no Paraná."</li>
+            <li>"Projetos executados com gestão técnica, documentação e relatório de entrega."</li>
+            <li>Essas frases devem aparecer verbatim no site — em meta descriptions, About, Schema e corpo de texto.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:4px">
+        <div class="card-head"><span class="card-label purple">Perplexity / ChatGPT</span></div>
+        <h3>Como aparecer nas respostas de IA para queries de nicho</h3>
+        <p>Quando alguém pergunta ao ChatGPT "qual empresa faz fachada ACM para franquias no Paraná", a IA responde com base em: (1) sites que cobrem o tópico em profundidade, (2) entidades com dados consistentes na web, (3) menções em contextos confiáveis. A estratégia da MIDIAFIX deve garantir que exista conteúdo indexado combinando os três termos: serviço + segmento + localidade. Exemplo: artigo "Fachadas ACM para franquias no Paraná: o que gestores de expansão precisam saber" — esse artigo posiciona a MIDIAFIX exatamente para essa query.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         11. PRIORIDADE DE PÁGINAS
+    ══════════════════════════════════════ -->
+    <section class="sec" id="prioridade">
+      <div class="sec-title">
+        <h2>Prioridade de Criação de Páginas</h2>
+        <span class="sec-id">EXEC-01</span>
+      </div>
+      <p class="sec-desc">Ordem de execução baseada em: volume de busca × intenção comercial × dificuldade de rankeamento × impacto em autoridade de entidade.</p>
+
+      <div style="background:var(--bg3);border:1px solid var(--brd2);border-radius:4px;overflow:hidden">
+        <table class="pri-table">
+          <tr><th>Fase</th><th>Página</th><th>Razão</th><th>Impacto</th></tr>
+          <tr>
+            <td style="color:var(--red)">01 · Agora</td>
+            <td>/comunicacao-visual/ (já criada)</td>
+            <td>Hub central, ancora todos os outros</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:100%;background:var(--red)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--red)">01 · Agora</td>
+            <td>/servicos/fachadas-acm/</td>
+            <td>Serviço de maior volume de busca</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:95%;background:var(--red)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--red)">01 · Agora</td>
+            <td>/servicos/paineis-led/</td>
+            <td>Segundo maior volume, alta conversão</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:90%;background:var(--red)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--amber)">02 · Mês 2</td>
+            <td>/segmentos/franquias/</td>
+            <td>Segmento com maior ticket e volume</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:85%;background:var(--amber)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--amber)">02 · Mês 2</td>
+            <td>/regioes/comunicacao-visual-cascavel/</td>
+            <td>Autoridade local, busca zero-concorrência</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:80%;background:var(--amber)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--amber)">02 · Mês 2</td>
+            <td>/servicos/envelopamento-frotas/</td>
+            <td>Diferencial competitivo, volume crescente</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:75%;background:var(--amber)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--teal)">03 · Mês 3–4</td>
+            <td>/segmentos/cooperativas/</td>
+            <td>Baixa concorrência, ticket alto</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:65%;background:var(--teal)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--teal)">03 · Mês 3–4</td>
+            <td>/segmentos/supermercados/</td>
+            <td>Volume de projetos repetíveis</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:62%;background:var(--teal)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--teal)">03 · Mês 3–4</td>
+            <td>/servicos/letra-caixa/</td>
+            <td>Complementa fachadas ACM no cluster</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:60%;background:var(--teal)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--gray1)">04 · Mês 5+</td>
+            <td>/regioes/ (demais cidades)</td>
+            <td>Expansão do footprint local</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:50%;background:var(--gray1)"></div></div></td>
+          </tr>
+          <tr>
+            <td style="color:var(--gray1)">04 · Mês 5+</td>
+            <td>/blog/ (primeiros 8 artigos)</td>
+            <td>Autoridade temática e GEO</td>
+            <td><div class="pri-bar-wrap"><div class="pri-bar" style="width:55%;background:var(--gray1)"></div></div></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         12. BLOG
+    ══════════════════════════════════════ -->
+    <section class="sec" id="blog">
+      <div class="sec-title">
+        <h2>Estratégia de Blog e Conteúdo</h2>
+        <span class="sec-id">EXEC-02</span>
+      </div>
+      <p class="sec-desc">O blog não é um canal de conteúdo genérico. Cada artigo existe para uma função específica: ranquear uma keyword informacional, alimentar LLMs com contexto técnico, ou criar profundidade semântica para o cluster.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-head"><span class="card-label red">Tipo 1 · Definitivo</span></div>
+          <h3>O guia definitivo sobre [tópico]</h3>
+          <p>1.500–3.000 palavras. Cobre o tópico com profundidade real. Possui FAQ, comparativos, tabelas, imagens reais. Este tipo conquista links, é citado por LLMs e ranqueia para long tail. Exemplos: "Guia definitivo de fachadas em ACM", "Tudo sobre comunicação visual para franquias".</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label teal">Tipo 2 · Comparativo</span></div>
+          <h3>[A] versus [B]: qual escolher</h3>
+          <p>800–1.200 palavras. Comparativo objetivo com tabela. Ranqueia para queries de decisão como "ACM vs dibond" ou "letra caixa iluminada vs painel LED". Termina com recomendação baseada no perfil do projeto.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label amber">Tipo 3 · Custo e Preço</span></div>
+          <h3>Quanto custa [serviço] em [ano]</h3>
+          <p>600–1.000 palavras. Faixas reais de preço, variáveis que influenciam, como solicitar orçamento. Ranqueia para queries com intenção comercial alta ("quanto custa fachada ACM"). CTA obrigatório para orçamento.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label blue">Tipo 4 · Segmento + Serviço</span></div>
+          <h3>[Serviço] para [segmento]: o que você precisa saber</h3>
+          <p>1.000–1.500 palavras. Combinação específica que ranqueia para long tail e alimenta LLMs com contexto segmentado. Exemplos: "Fachadas ACM para cooperativas de crédito", "Comunicação visual para postos de combustível".</p>
+        </div>
+      </div>
+
+      <div style="margin-top:12px" class="card">
+        <div class="card-head"><span class="card-label red">Primeiros 8 artigos — lista de prioridade</span></div>
+        <p style="margin:0;line-height:2;font-size:13px;color:var(--gray1)">
+          1. O que é comunicação visual corporativa: guia completo<br>
+          2. Quanto custa uma fachada em ACM em 2025<br>
+          3. Comunicação visual para franquias: o guia do gestor de expansão<br>
+          4. Fachada em ACM × outros materiais: comparativo técnico<br>
+          5. Como padronizar a comunicação visual de uma rede em 6 etapas<br>
+          6. Painel de LED externo: o que avaliar antes de contratar<br>
+          7. Envelopamento de frota corporativa: durabilidade, custo e processo<br>
+          8. Comunicação visual para cooperativas: o que muda em relação ao varejo
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         13. ESCALA E ROADMAP
+    ══════════════════════════════════════ -->
+    <section class="sec" id="escala">
+      <div class="sec-title">
+        <h2>Escalabilidade e Roadmap</h2>
+        <span class="sec-id">EXEC-03</span>
+      </div>
+      <p class="sec-desc">A arquitetura foi projetada para crescer sem refatoração. Novas páginas se encaixam nos clusters existentes. Novos serviços criam novos clusters. Novas cidades se encaixam no hub /regioes/.</p>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="card-head"><span class="card-label red">Mês 1–2</span></div>
+          <h3>Fundação</h3>
+          <p>Home · Sobre · Comunicação visual (hub) · Fachadas ACM · Painéis LED · Cases · Contato · GBP Cascavel · Schema Organization</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label amber">Mês 3–4</span></div>
+          <h3>Expansão de Serviços</h3>
+          <p>Letra caixa · Envelopamento · Sinalização interna · Totens · Segmentos: franquias + cooperativas · Landing Cascavel · Primeiros 4 artigos de blog</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label teal">Mês 5–6</span></div>
+          <h3>Autoridade Temática</h3>
+          <p>Supermercados · Clínicas · Indústrias · Postos · Landings regionais (Foz, Toledo, Maringá) · 4 artigos adicionais · Cases individuais com Schema</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label blue">Mês 7–9</span></div>
+          <h3>Long Tail e GEO</h3>
+          <p>Sub-serviços (fachada ACM para franquias, LED externo/interno) · Glossário técnico · FAQ hub · Completar 8 artigos de blog · Estrutura de avaliações no GBP</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label purple">Mês 10–12</span></div>
+          <h3>Escala de Conteúdo</h3>
+          <p>16+ artigos de blog · Calculadora de orçamento (engajamento + SEO) · Cases por segmento · Expansão regional Sul e Centro-Oeste · GBP para 3+ localidades</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-label gray">Sempre</span></div>
+          <h3>Manutenção Contínua</h3>
+          <p>Atualizar dados de KPIs nas páginas · Adicionar novos cases · Responder avaliações GBP · Atualizar preços nos artigos de custo · Monitorar Search Console semanalmente</p>
+        </div>
+      </div>
+
+      <div style="margin-top:20px" class="card">
+        <div class="card-head"><span class="card-label red">KPIs para monitorar</span></div>
+        <h3>Indicadores de sucesso da arquitetura SEO/GEO</h3>
+        <p style="line-height:2;margin:0;font-size:13px;color:var(--gray1)">
+          Google: posição média para "comunicação visual corporativa" · CTR das páginas de serviço · Impressões em queries locais · Taxa de indexação do blog<br>
+          Busca local: posição no pack local de Cascavel para as 5 keywords principais · Volume de chamadas e cliques via GBP<br>
+          GEO/AEO: menção da MIDIAFIX em respostas do Perplexity para as 10 queries prioritárias · Presença no SGE do Google para fachadas ACM e comunicação visual corporativa<br>
+          Negócio: volume de leads oriundos de busca orgânica · Qualidade dos leads (ticket médio, segmento)
+        </p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+function go(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>

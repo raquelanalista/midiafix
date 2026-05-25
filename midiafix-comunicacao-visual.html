@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunicação Visual Corporativa | MIDIAFIX</title>
+<meta name="description" content="A MIDIAFIX é referência em comunicação visual corporativa premium. Projetos de identidade visual, sinalização, fachadas e ambientação para grandes empresas, redes e corporações.">
+<link rel="canonical" href="https://midiafix.com.br/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1A1A1A">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" as="image" href="/assets/img/hero.jpg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Midiafix Comunicação Visual">
+<meta property="og:url" content="https://midiafix.com.br/">
+<meta property="og:title" content="Comunicação Visual Corporativa | MIDIAFIX">
+<meta property="og:description" content="A MIDIAFIX é referência em comunicação visual corporativa premium. Projetos de identidade visual, sinalização, fachadas e ambientação para grandes empresas, redes e corporações.">
+<meta property="og:image" content="https://midiafix.com.br/assets/img/cta-sede.jpg">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="1024">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Comunicação Visual Corporativa | MIDIAFIX">
+<meta name="twitter:description" content="A MIDIAFIX é referência em comunicação visual corporativa premium. Projetos de identidade visual, sinalização, fachadas e ambientação para grandes empresas, redes e corporações.">
+<meta name="twitter:image" content="https://midiafix.com.br/assets/img/cta-sede.jpg">
+
+<!-- JSON-LD · LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Midiafix Comunicação Visual",
+  "description": "A MIDIAFIX é referência em comunicação visual corporativa premium. Projetos de identidade visual, sinalização, fachadas e ambientação para grandes empresas, redes e corporações.",
+  "url": "https://midiafix.com.br",
+  "logo": "https://midiafix.com.br/assets/img/logo-midiafix.png",
+  "image": "https://midiafix.com.br/assets/img/cta-sede.jpg",
+  "telephone": "+554530390303",
+  "email": "vendas3@midiafix.com.br",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cascavel",
+    "addressRegion": "PR",
+    "addressCountry": "BR"
+  },
+  "areaServed": "BR",
+  "sameAs": [
+    "https://instagram.com/midiafix",
+    "https://linkedin.com/company/midiafix"
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+
+<style>
+  /* Compat shim: nomes PT legados → tokens canônicos (assets/css/tokens.css) */
+  :root {
+    --grafite:          var(--mx-grafite);
+    --vermelho:         var(--mx-red);
+    --vermelho-escuro:  var(--mx-red-dark);
+    --branco:           var(--mx-white);
+    --cinza-tecnico:    var(--mx-gray-100);
+    --cinza-claro:      var(--mx-gray-300);
+    --cinza-linha:      var(--mx-border-mid);
+    --cinza-card:       var(--mx-surface-4);
+    --cinza-borda:      var(--mx-border-strong);
+  }
+
+  /* Componentes em assets/css/components.css.
+     Abaixo, apenas o que é específico desta página:
+     hero (não migrado nesta etapa), footer (sem equivalente canônico),
+     composição de seções e uma camada de override que preserva a escala
+     de produção desta página sobre a escala (mais justa) do design-system. */
+
+  /* ── SECTION BASE & BACKGROUNDS ── */
+  section { padding: 120px 0; }
+  @media (max-width: 768px) { section { padding: 80px 0; } }
+  .problema, .diferenciais, .cases, .faq-section { background: var(--mx-surface-2); }
+
+  /* ── HERO (mantido — não migrado nesta etapa) ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 100px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom,
+        rgba(10,10,10,0.55) 0%,
+        rgba(10,10,10,0.72) 40%,
+        rgba(10,10,10,0.92) 72%,
+        #0d0d0d 100%
+      ),
+      url('assets/img/hero.jpg') center 72%/cover no-repeat;
+  }
+  .hero-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, var(--vermelho) 30%, var(--vermelho) 70%, transparent 100%);
+    opacity: 0.5;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .hero-eyebrow-line {
+    width: 32px;
+    height: 1px;
+    background: var(--vermelho);
+    opacity: 0.8;
+  }
+  .hero-eyebrow-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245,245,245,0.45);
+  }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 78px);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    color: #ffffff;
+    margin-bottom: 32px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: #ffffff;
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--vermelho);
+    border-radius: 1px;
+  }
+  .hero-sub {
+    font-size: clamp(15px, 1.4vw, 17px);
+    font-weight: 300;
+    color: rgba(245,245,245,0.55);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 52px;
+    letter-spacing: 0.01em;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .hero-actions .btn { font-size: 14px; padding: 16px 32px; }
+  .hero-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(245,245,245,0.12);
+    margin: 0 4px;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 44px;
+    right: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,245,245,0.3);
+  }
+  .hero-scroll-line {
+    width: 36px;
+    height: 1px;
+    background: rgba(245,245,245,0.2);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 180px;
+    background: linear-gradient(to bottom, transparent, #0d0d0d);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── FOOTER (sem equivalente canônico) ── */
+  footer {
+    background: #111;
+    border-top: 1px solid var(--cinza-borda);
+    padding: 64px 0 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 56px;
+  }
+  .footer-brand h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--branco);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .footer-brand h3 span { color: var(--vermelho); }
+  .footer-brand p {
+    font-size: 14px;
+    color: var(--cinza-claro);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+  .footer-col h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cinza-tecnico);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul a {
+    font-size: 14px;
+    color: var(--cinza-claro);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--branco); }
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 1px solid var(--cinza-linha);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-bottom p {
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── OVERRIDES DE ESCALA (preservam a aparência de produção) ── */
+  .mx-nav { background: rgba(26,26,26,0.95); }
+  .mx-tag { font-size: 11px; padding: 6px 14px; margin-bottom: 28px; border-color: rgba(229,57,53,0.35); }
+  .mx-section-header { margin-bottom: 72px; }
+  .mx-section-header p { margin-top: 20px; max-width: 560px; }
+  .mx-kpi-value { font-family: var(--font-display); }
+  .mx-kpi-value sup { font-size: 22px; }
+  .mx-kpi-label { font-size: 12px; }
+  .mx-pain-item { padding: 28px 32px; }
+  .mx-pain-icon { width: 36px; height: 36px; }
+  .mx-img-badge { bottom: 28px; left: 28px; padding: 18px 24px; background: var(--mx-surface-3); backdrop-filter: none; }
+  .mx-check-list { gap: 16px; margin-top: 40px; }
+  .mx-check-item { padding: 18px 24px; }
+  .mx-check-dot { width: 6px; height: 6px; }
+  .mx-dif-card { padding: 48px 40px; }
+  .mx-dif-card:hover { background: #252525; }
+  .mx-dif-num { font-size: 11px; opacity: 1; margin-bottom: 28px; }
+  .mx-dif-card h3 { font-size: 19px; margin-bottom: 16px; }
+  .mx-seg-grid { gap: 20px; }
+  .mx-seg-card { padding: 36px 28px; }
+  .mx-seg-card h3 { font-size: 15px; }
+  .mx-seg-icon { width: 44px; height: 44px; }
+  .mx-cases-grid { gap: 20px; }
+  .mx-case-seg { top: 16px; left: 16px; }
+  .mx-case-body { padding: 28px 28px 32px; }
+  .mx-case-body h3 { font-size: 17px; }
+  .mx-case-stat strong { font-family: var(--font-display); font-size: 20px; }
+  .mx-case-meta { padding-top: 18px; }
+  .mx-process-step { grid-template-columns: 80px 1fr auto; }
+  .mx-step-num { padding: 36px 32px; }
+  .mx-step-body { padding: 36px 48px; }
+  .mx-step-body h3 { font-size: 17px; }
+  .process-num { font-size: 13px; opacity: 1; }
+  .mx-step-phase-pill { color: var(--mx-gray-100); }
+  .mx-accordion-trigger { padding: 28px 32px; }
+  .mx-accordion-trigger span { font-size: 15px; }
+  .mx-accordion-icon { width: 24px; height: 24px; }
+  .mx-accordion-icon svg { width: 12px; height: 12px; }
+  .mx-accordion-body-inner { padding: 0 32px 28px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ NAV ══ -->
+<nav class="mx-nav">
+  <a href="#" class="mx-logo"><img src="assets/img/logo-midiafix.png" alt="MIDIAFIX — Comunicação Visual" style="height:30px;width:auto;display:block;"></a>
+  <ul class="mx-nav-links">
+    <li><a href="#solucao">Solução</a></li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="#segmentos">Segmentos</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://wa.me/554530390303" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Solicitar Proposta</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════ HERO ══ -->
+<section class="hero" style="padding-top:72px;">
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="mx-container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Comunicação Visual Corporativa</span>
+      </div>
+      <h1>A identidade da sua<br>empresa no mundo<br><em>físico</em>, com padrão.</h1>
+      <p class="hero-sub">Projetos de comunicação visual para grandes empresas, redes e corporações que exigem execução impecável, consistência de marca e parceiros preparados para escala.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/554530390303" target="_blank" rel="noopener" class="btn btn-primary">
+          Solicitar Diagnóstico
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <div class="hero-divider"></div>
+        <a href="#cases" class="btn btn-outline">Ver Projetos Executados</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ STATS ══ -->
+<div class="mx-kpi-bar">
+  <div class="mx-container" style="padding:0;">
+    <div class="mx-kpi-grid">
+      <div class="mx-kpi-item reveal">
+        <div class="mx-kpi-value">16<sup>+</sup></div>
+        <div class="mx-kpi-label">Anos de mercado</div>
+      </div>
+      <div class="mx-kpi-item reveal reveal-d1">
+        <div class="mx-kpi-value">28 mil<sup>+</sup></div>
+        <div class="mx-kpi-label">Projetos executados</div>
+      </div>
+      <div class="mx-kpi-item reveal reveal-d2">
+        <div class="mx-kpi-value">8 mil<sup>+</sup></div>
+        <div class="mx-kpi-label">Clientes atendidos</div>
+      </div>
+      <div class="mx-kpi-item reveal reveal-d3">
+        <div class="mx-kpi-value">500<sup>+</sup></div>
+        <div class="mx-kpi-label">Cidades atendidas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PROBLEMA ══ -->
+<section class="problema" id="problema">
+  <div class="mx-container">
+    <div class="mx-section-header reveal">
+      <div class="mx-tag">O Diagnóstico</div>
+      <h2 class="mx-h2">O que acontece quando a comunicação<br>visual não acompanha o crescimento</h2>
+    </div>
+    <div class="mx-problem-grid">
+      <div class="reveal">
+        <p class="mx-body-lg" style="margin-bottom:24px;">Empresas em crescimento acumulam um passivo invisível: a comunicação visual que funcionava para uma unidade não sustenta uma rede. Fachadas inconsistentes, materiais despadronizados e identidade diluída custam mais do que pareece — em reputação, em conversão e em autoridade de marca.</p>
+        <p class="mx-body-lg" style="margin-bottom:24px;"><strong style="color:var(--branco);font-weight:500;">O problema não é estético. É estrutural.</strong> Uma marca percebida como desorganizada visualmente transmite o mesmo sobre sua operação. O mercado lê a comunicação visual como evidência de gestão.</p>
+        <p class="mx-body-lg">Empresas que cresceram sem uma estratégia consistente de comunicação visual enfrentam retrabalho constante, custos fragmentados e dificuldade de escalar padrão — porque nunca definiram um sistema. Definiram peças.</p>
+      </div>
+      <ul class="mx-pain-list reveal reveal-d2">
+        <li class="mx-pain-item">
+          <div class="mx-pain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="mx-pain-body">
+            <h4>Inconsistência entre unidades</h4>
+            <p>Cada ponto de venda comunica de forma diferente, fragmentando a percepção de marca.</p>
+          </div>
+        </li>
+        <li class="mx-pain-item">
+          <div class="mx-pain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="mx-pain-body">
+            <h4>Fornecedores sem capacidade de escala</h4>
+            <p>Gráficas e estúdios locais não sustentam volume, prazo e padrão simultaneamente.</p>
+          </div>
+        </li>
+        <li class="mx-pain-item">
+          <div class="mx-pain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <div class="mx-pain-body">
+            <h4>Retrabalho e custos elevados</h4>
+            <p>Ausência de padronização gera aprovações repetidas, ajustes e desperdício de orçamento.</p>
+          </div>
+        </li>
+        <li class="mx-pain-item">
+          <div class="mx-pain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="mx-pain-body">
+            <h4>Identidade visual não protegida fisicamente</h4>
+            <p>Marcas que investem em branding perdem autoridade quando a execução física não entrega.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SOLUÇÃO ══ -->
+<section id="solucao">
+  <div class="mx-container">
+    <div class="mx-split">
+      <div class="mx-img-frame ratio-4-5 reveal">
+        <img loading="lazy" src="assets/img/solucao.jpg" alt="Equipe MIDIAFIX em execução de projeto corporativo">
+        <div class="mx-img-badge">
+          <strong>Padrão</strong>
+          <span>em cada entrega</span>
+        </div>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="mx-tag">A Solução MIDIAFIX</div>
+        <h2 class="mx-h2" style="font-size:clamp(26px,3vw,40px);line-height:1.2;margin-bottom:24px;">
+          Um parceiro estruturado para projetos que exigem mais do que criatividade
+        </h2>
+        <p class="mx-body-lg" style="margin-bottom:20px;">A MIDIAFIX não é uma gráfica. Não é uma agência. É uma empresa de comunicação visual corporativa com estrutura, processo e capacidade para atender projetos de escala — do planejamento à instalação.</p>
+        <p class="mx-body-lg" style="margin-bottom:20px;">Nossa operação foi construída para garantir que a identidade visual da sua empresa seja aplicada com precisão em qualquer ponto, em qualquer volume, dentro do prazo.</p>
+        <p class="mx-body-lg"><strong style="color:var(--branco);font-weight:500;">Isso significa gerenciamento de projeto real, equipe técnica especializada e entrega documentada.</strong></p>
+        <ul class="mx-check-list">
+          <li class="mx-check-item"><span class="mx-check-dot"></span>Planejamento estratégico antes da produção</li>
+          <li class="mx-check-item"><span class="mx-check-dot"></span>Capacidade para projetos multi-unidades e expansões de rede</li>
+          <li class="mx-check-item"><span class="mx-check-dot"></span>Gerenciamento de ponta a ponta: briefing, produção, logística e instalação</li>
+          <li class="mx-check-item"><span class="mx-check-dot"></span>Documentação fotográfica e relatório técnico de cada entrega</li>
+          <li class="mx-check-item"><span class="mx-check-dot"></span>Padrão de qualidade auditado e consistente entre unidades</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ DIFERENCIAIS ══ -->
+<section class="diferenciais" id="diferenciais">
+  <div class="mx-container">
+    <div class="mx-section-header centered reveal">
+      <div class="mx-tag">Diferenciais MIDIAFIX</div>
+      <h2 class="mx-h2">O que nos separa de fornecedores comuns</h2>
+      <p class="mx-body-lg">Não oferecemos promessas genéricas. Oferecemos estrutura comprovada, capacidade técnica real e entrega documentada.</p>
+    </div>
+    <div class="mx-dif-grid">
+      <div class="mx-dif-card reveal">
+        <div class="mx-dif-num">01</div>
+        <h3>Capacidade Estrutural para Projetos de Escala</h3>
+        <p>Equipe própria, parque de produção completo com mais de 1.300m² e logística integrada para atender redes com dezenas ou centenas de pontos simultaneamente, sem perda de padrão ou prazo.</p>
+      </div>
+      <div class="mx-dif-card reveal reveal-d1">
+        <div class="mx-dif-num">02</div>
+        <h3>Gestão de Projeto como Método, Não como Exceção</h3>
+        <p>Cada projeto tem um responsável, cronograma aprovado, pontos de controle definidos e documentação fotográfica. Além de profissionais de PCP dedicados à nossa agenda, a Midiafix utiliza inteligência artificial de forma complementar para dar mais segurança de prazo e permitir o acompanhamento do andamento em tempo real.</p>
+      </div>
+      <div class="mx-dif-card reveal reveal-d2">
+        <div class="mx-dif-num">03</div>
+        <h3>Consistência de Marca em Toda a Cadeia Física</h3>
+        <p>Do arquivo de identidade visual à peça instalada, aplicamos o mesmo padrão em fachadas, ambientações, sinalização e materiais — garantindo que a marca seja a mesma em cada ponto.</p>
+      </div>
+      <div class="mx-dif-card reveal">
+        <div class="mx-dif-num">04</div>
+        <h3>Especialização em Comunicação Visual Corporativa</h3>
+        <p>Nossos gestores atuam na área de comunicação visual há 30 anos, aliando experiência prática às tecnologias mais modernas. A Midiafix possui mais de 16 anos exclusivamente dedicados à comunicação visual de empresas. Não fazemos de tudo. Fazemos isso com profundidade — e essa escolha é uma vantagem competitiva para quem nos contrata.</p>
+      </div>
+      <div class="mx-dif-card reveal reveal-d1">
+        <div class="mx-dif-num">05</div>
+        <h3>Logística e Instalação Integradas à Produção</h3>
+        <p>Produção, transporte e instalação coordenados pelo mesmo time. Isso elimina o gap de responsabilidade que fragmenta projetos quando fornecedores diferentes não se comunicam.</p>
+      </div>
+      <div class="mx-dif-card reveal reveal-d2">
+        <div class="mx-dif-num">06</div>
+        <h3>Relacionamento Técnico de Longo Prazo</h3>
+        <p>Nossos clientes crescem e expandem sem trocar de parceiro. Construímos um histórico técnico da sua marca que acelera novos projetos e protege o padrão ao longo do tempo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SEGMENTOS ══ -->
+<section id="segmentos">
+  <div class="mx-container">
+    <div class="mx-section-header reveal">
+      <div class="mx-tag">Segmentos Atendidos</div>
+      <h2 class="mx-h2">Estrutura para quem<br>opera em escala</h2>
+      <p class="mx-body-lg">A MIDIAFIX atende empresas que cresceram além das soluções improvisadas e precisam de um parceiro à altura da sua operação.</p>
+    </div>
+    <div class="mx-seg-grid">
+      <div class="mx-seg-card reveal">
+        <div class="mx-seg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Franquias e Redes</h3>
+        <p>Padronização de visual em rede com volume, velocidade e consistência entre todas as unidades franqueadas.</p>
+      </div>
+      <div class="mx-seg-card reveal reveal-d1">
+        <div class="mx-seg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Varejo e Supermercados</h3>
+        <p>Comunicação de loja, ambientação sazonal, fachadas e sinalização interna para redes de varejo em expansão.</p>
+      </div>
+      <div class="mx-seg-card reveal reveal-d2">
+        <div class="mx-seg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Indústria e Logística</h3>
+        <p>Identidade visual aplicada em plantas industriais, frotas, galpões e ambientes técnicos de grande escala.</p>
+      </div>
+      <div class="mx-seg-card reveal reveal-d3">
+        <div class="mx-seg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Educação e Saúde</h3>
+        <p>Sinalização, ambientação e identidade física para redes de clínicas, hospitais, escolas e universidades.</p>
+      </div>
+      <div class="mx-seg-card reveal">
+        <div class="mx-seg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>Frotas Corporativas</h3>
+        <p>Adesivagem e envelopamento de frotas com padronização total, durabilidade de material e controle de inventário.</p>
+      </div>
+      <div class="mx-seg-card reveal reveal-d1">
+        <div class="mx-seg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Bancos e Financeiras</h3>
+        <p>Comunicação visual de agências, postos de atendimento e ambientes regulados com rigor técnico e compliance.</p>
+      </div>
+      <div class="mx-seg-card reveal reveal-d2">
+        <div class="mx-seg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>Food Service</h3>
+        <p>Comunicação visual para redes de restaurantes, fast-food e dark kitchens em expansão nacional.</p>
+      </div>
+      <div class="mx-seg-card reveal reveal-d3">
+        <div class="mx-seg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <h3>Construtoras e Real Estate</h3>
+        <p>Identidade visual de empreendimentos, totem de obra, comunicação de lançamento e ambientação de stands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CASES ══ -->
+<section class="cases" id="cases">
+  <div class="mx-container">
+    <div class="mx-section-header reveal">
+      <div class="mx-tag">Projetos Executados</div>
+      <h2 class="mx-h2">Entrega que pode ser<br>verificada, não apenas prometida</h2>
+      <p class="mx-body-lg">Uma seleção de projetos que demonstram nossa capacidade técnica, escala de execução e compromisso com padrão.</p>
+    </div>
+    <div class="mx-cases-grid">
+      <div class="mx-case-card reveal">
+        <div class="mx-case-img">
+          <img loading="lazy" src="assets/img/cases/case-supermercado.jpg" alt="Fachada do supermercado Mufatão executada pela Midiafix com revestimento em ACM e comunicação visual de grande escala.">
+          <span class="mx-case-seg">Rede de Supermercados</span>
+        </div>
+        <div class="mx-case-body">
+          <h3>Economia de 40% após adaptação de projeto</h3>
+          <p>Em conjunto com o arquiteto da rede, após avaliação de viabilidade feita pela Midiafix, o cliente obteve o mesmo resultado visual com economia de 40% no revestimento de ACM com método exclusivo Midiafix. O quarto projeto da rede está previsto para execução até final de 2026.</p>
+          <div class="mx-case-meta">
+            <div class="mx-case-stat">
+              <strong>5</strong>
+              <span>Unidades</span>
+            </div>
+            <div class="mx-case-stat">
+              <strong>16 anos</strong>
+              <span>Parceria</span>
+            </div>
+            <div class="mx-case-stat">
+              <strong>40%</strong>
+              <span>Economia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mx-case-card reveal reveal-d1">
+        <div class="mx-case-img">
+          <img loading="lazy" src="assets/img/cases/case-franquia.jpg" alt="Fachada da franquia Anjos Colchões e Sofás com comunicação visual executada pela Midiafix.">
+          <span class="mx-case-seg">Franquia Nacional</span>
+        </div>
+        <div class="mx-case-body">
+          <h3>Rede de parceiros Midiafix para instalação</h3>
+          <p>As franquias atendidas pela Midiafix possuem a tranquilidade de escolha entre instalação com parceiros indicados e orientados remotamente, ou equipe Midiafix própria com instalação inclusive fora do Brasil.</p>
+          <div class="mx-case-meta">
+            <div class="mx-case-stat">
+              <strong>+240</strong>
+              <span>Lojas instaladas</span>
+            </div>
+            <div class="mx-case-stat">
+              <strong>5</strong>
+              <span>Países</span>
+            </div>
+            <div class="mx-case-stat">
+              <strong>100%</strong>
+              <span>Dentro do prazo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mx-case-card reveal reveal-d2">
+        <div class="mx-case-img">
+          <img loading="lazy" src="assets/img/cases/case-frota.jpg" alt="Frota industrial envelopada pela Midiafix com identidade visual aplicada em caminhões.">
+          <span class="mx-case-seg">Envelopamento de Frota Industrial</span>
+        </div>
+        <div class="mx-case-body">
+          <h3>Envelopamento de frota industrial</h3>
+          <p>A Midiafix é a única empresa em Cascavel-PR com certificação 3M MCS e 3M Preferred. Tem capacidade de entrega de mais de 300 veículos adesivados por mês. Área dedicada à aplicação de adesivos em frota de 250m². Atualmente, em apenas um cliente, entregamos uma média de 10 ônibus adesivados por dia.</p>
+          <div class="mx-case-meta">
+            <div class="mx-case-stat">
+              <strong>230</strong>
+              <span>Veículos em 1 mês</span>
+            </div>
+            <div class="mx-case-stat">
+              <strong>250m²</strong>
+              <span>Área exclusiva</span>
+            </div>
+            <div class="mx-case-stat">
+              <strong>3M</strong>
+              <span>MCS + Preferred</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ PROCESSO ══ -->
+<section id="processo">
+  <div class="mx-container">
+    <div class="mx-section-header reveal">
+      <div class="mx-tag">Processo de Execução</div>
+      <h2 class="mx-h2">Como um projeto MIDIAFIX<br>é conduzido do início ao fim</h2>
+      <p class="mx-body-lg">Transparência total em cada etapa. Você sabe o que acontece, quando acontece e quem é responsável.</p>
+    </div>
+    <div class="mx-process-list reveal">
+      <div class="mx-process-step">
+        <div class="mx-step-num"><div class="process-num">01</div></div>
+        <div class="mx-step-body">
+          <h3>Diagnóstico e Briefing Técnico</h3>
+          <p>Reunião de escopo com análise de identidade visual, levantamento de pontos de aplicação, definição de prioridades e levantamento fotográfico ou visita técnica quando necessário.</p>
+        </div>
+        <div class="mx-step-phase"><span class="mx-step-phase-pill">Estratégia</span></div>
+      </div>
+      <div class="mx-process-step">
+        <div class="mx-step-num"><div class="process-num">02</div></div>
+        <div class="mx-step-body">
+          <h3>Proposta Técnica e Plano de Projeto</h3>
+          <p>Apresentação detalhada com especificações de material, prazos por fase, responsabilidades, cronograma de aprovação e estimativa de custo com memória de cálculo.</p>
+        </div>
+        <div class="mx-step-phase"><span class="mx-step-phase-pill">Planejamento</span></div>
+      </div>
+      <div class="mx-process-step">
+        <div class="mx-step-num"><div class="process-num">03</div></div>
+        <div class="mx-step-body">
+          <h3>Desenvolvimento e Aprovação de Arte</h3>
+          <p>Criação ou adaptação dos arquivos para produção, mockup contextualizado para aprovação e validação técnica antes de iniciar qualquer tiragem.</p>
+        </div>
+        <div class="mx-step-phase"><span class="mx-step-phase-pill">Criação</span></div>
+      </div>
+      <div class="mx-process-step">
+        <div class="mx-step-num"><div class="process-num">04</div></div>
+        <div class="mx-step-body">
+          <h3>Produção Controlada com Inspeção de Qualidade</h3>
+          <p>Produção interna com inspeção de cor, acabamento e corte antes da saída. Para projetos em escala, produção em lotes com aprovação de amostra piloto.</p>
+        </div>
+        <div class="mx-step-phase"><span class="mx-step-phase-pill">Produção</span></div>
+      </div>
+      <div class="mx-process-step">
+        <div class="mx-step-num"><div class="process-num">05</div></div>
+        <div class="mx-step-body">
+          <h3>Logística e Instalação Técnica</h3>
+          <p>Transporte coordenado, equipe de instalação especializada, adequação às normas locais e instalação documentada com fotos antes e depois.</p>
+        </div>
+        <div class="mx-step-phase"><span class="mx-step-phase-pill">Execução</span></div>
+      </div>
+      <div class="mx-process-step">
+        <div class="mx-step-num"><div class="process-num">06</div></div>
+        <div class="mx-step-body">
+          <h3>Relatório de Entrega e Pós-projeto</h3>
+          <p>Relatório técnico fotográfico por unidade, checklist de conformidade e disponibilidade para manutenção, atualização e continuidade de expansão.</p>
+        </div>
+        <div class="mx-step-phase"><span class="mx-step-phase-pill">Encerramento</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FAQ ══ -->
+<section class="faq-section" id="faq">
+  <div class="mx-container">
+    <div class="mx-faq-layout">
+      <div class="reveal">
+        <div class="mx-tag">Perguntas Frequentes</div>
+        <h2 class="mx-h2" style="font-size:clamp(26px,3vw,38px);">O que empresas precisam saber antes de contratar</h2>
+        <p class="mx-body" style="margin-top:20px;">Respondemos as dúvidas mais estratégicas sobre comunicação visual corporativa, processo de contratação e capacidade de execução.</p>
+      </div>
+      <div class="mx-accordion reveal reveal-d2">
+        <div class="mx-accordion-item">
+          <button class="mx-accordion-trigger" type="button">
+            <span>A MIDIAFIX atende projetos fora do estado de origem?</span>
+            <div class="mx-accordion-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Sim. A MIDIAFIX possui estrutura logística e equipes de instalação parceiras habilitadas em mais de 47 cidades do Brasil. Para projetos multi-estaduais ou nacionais, montamos um plano de logística dedicado com supervisão centralizada e padrão de execução unificado independente da localização.</div></div>
+        </div>
+        <div class="mx-accordion-item">
+          <button class="mx-accordion-trigger" type="button">
+            <span>Qual é o prazo mínimo para um projeto corporativo?</span>
+            <div class="mx-accordion-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Depende do escopo, volume e complexidade técnica. Projetos de unidade única com escopo definido podem ser entregues entre 7 e 21 dias úteis. Projetos de rede ou múltiplas unidades são planejados com cronograma faseado. O prazo é definido na proposta técnica após briefing — nunca antes de entender o projeto.</div></div>
+        </div>
+        <div class="mx-accordion-item">
+          <button class="mx-accordion-trigger" type="button">
+            <span>A empresa precisa ter manual de identidade visual pronto?</span>
+            <div class="mx-accordion-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Não é obrigatório, mas recomendável. Se a empresa possui identidade visual estabelecida, trabalhamos com os arquivos existentes. Se há lacunas ou ausência de especificações técnicas para comunicação visual física, podemos desenvolver o manual de aplicação como parte do escopo do projeto.</div></div>
+        </div>
+        <div class="mx-accordion-item">
+          <button class="mx-accordion-trigger" type="button">
+            <span>Como funciona o acompanhamento de projetos multi-unidades?</span>
+            <div class="mx-accordion-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Cada projeto tem um gerente de conta dedicado. O acompanhamento é feito com relatórios periódicos por fase, acesso a dashboard de status por unidade e comunicação direta com o gerente responsável. Ao final de cada unidade entregue, o cliente recebe relatório fotográfico individual.</div></div>
+        </div>
+        <div class="mx-accordion-item">
+          <button class="mx-accordion-trigger" type="button">
+            <span>Quais materiais e técnicas a MIDIAFIX utiliza?</span>
+            <div class="mx-accordion-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Trabalhamos com adesivo vinil de alta performance, ACM, lona tensionada, letras caixas iluminadas e não iluminadas, totens, painéis LED, plotagem, envelopamento e sinalização técnica interna. A especificação de material é feita de acordo com a necessidade técnica do projeto, durabilidade requerida e ambiente de aplicação.</div></div>
+        </div>
+        <div class="mx-accordion-item">
+          <button class="mx-accordion-trigger" type="button">
+            <span>A MIDIAFIX oferece contrato de manutenção contínua?</span>
+            <div class="mx-accordion-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Sim. Para clientes com rede de unidades ou necessidade recorrente, oferecemos contratos de manutenção preventiva e corretiva com SLA definido, inventário de materiais sob gestão e prioridade de atendimento. Esse modelo garante que a comunicação visual seja preservada ao longo do tempo sem necessidade de abrir processos a cada demanda.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CTA FINAL ══ -->
+<section class="mx-cta" id="contato">
+  <div class="mx-cta-bg" style="background:radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.42) 100%),linear-gradient(rgba(7,7,7,0.38) 0%, rgba(7,7,7,0.48) 55%, rgba(7,7,7,0.60) 100%),url('assets/img/cta-sede.jpg') center 68%/cover no-repeat;filter:blur(1px) brightness(0.86) saturate(0.96);transform:scale(1.04);"></div>
+  <div class="mx-cta-top-line"></div>
+  <div class="mx-container">
+    <div class="mx-cta-content reveal">
+      <div class="mx-tag" style="margin-bottom:32px;">Próximo Passo</div>
+      <h2 class="mx-h2" style="font-size:clamp(30px,4.5vw,58px);color:#fff;margin-bottom:24px;">Pronto para um parceiro<br>à altura do seu projeto?</h2>
+      <p class="mx-body-lg" style="max-width:500px;margin:0 auto 48px;">Agende um diagnóstico técnico sem compromisso. Nossa equipe analisa o seu projeto e apresenta uma proposta estruturada.</p>
+      <div class="mx-cta-actions">
+        <a href="https://wa.me/554530390303" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+          Solicitar Diagnóstico Gratuito
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="https://wa.me/554530390303" target="_blank" rel="noopener" class="btn btn-outline btn-lg">Falar com um Especialista</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER ══ -->
+<footer>
+  <div class="mx-container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3><img loading="lazy" src="assets/img/logo-midiafix.png" alt="MIDIAFIX — Comunicação Visual" style="height:40px;width:auto;display:block;"></h3>
+        <p>Comunicação visual corporativa para empresas que precisam de padrão, escala e parceiros preparados para crescer junto.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#solucao">Fachadas Corporativas</a></li>
+          <li><a href="#solucao">Sinalização Interna</a></li>
+          <li><a href="#solucao">Ambientação de Espaços</a></li>
+          <li><a href="#solucao">Frota e Envelopamento</a></li>
+          <li><a href="#solucao">Totens e Painéis</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#solucao">Sobre a MIDIAFIX</a></li>
+          <li><a href="#cases">Cases e Projetos</a></li>
+          <li><a href="#processo">Processo de Trabalho</a></li>
+          <li><a href="https://wa.me/554530390303" target="_blank" rel="noopener">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="mailto:vendas3@midiafix.com.br">vendas3@midiafix.com.br</a></li>
+          <li><a href="tel:+554530390303">(45) 3039-0303</a></li>
+          <li><a href="https://linkedin.com/company/midiafix" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://instagram.com/midiafix" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 MIDIAFIX Comunicação Visual. Todos os direitos reservados.</p>
+      <p>Política de Privacidade · Termos de Uso</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/ui.js" defer></script>
+</body>
+</html>

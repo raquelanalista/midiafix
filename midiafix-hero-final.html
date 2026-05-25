@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>MIDIAFIX — Comunicação Visual Corporativa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+
+<style>
+  /* Compat shim: nomes abreviados legados → tokens canônicos */
+  :root {
+    --red:   var(--mx-red);
+    --red2:  var(--mx-red-dark);
+    --black: var(--mx-grafite-deeper);
+    --white: var(--mx-white);
+    --gray:  var(--mx-gray-300);
+    --brd:   var(--mx-border-subtle);
+  }
+
+  /* Fundo da página mais profundo (alinhado ao hero) */
+  body { background: var(--mx-grafite-deeper); }
+
+  /* ─── NAV (bespoke — fora do escopo desta consolidação) ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    height: 72px;
+    border-bottom: 1px solid var(--brd);
+    background: rgba(7,7,7,0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  .nav-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo em { font-style: normal; color: var(--red); }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12.5px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: rgba(242,242,242,0.42);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 26px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--red2); }
+  .nav-cta svg { width: 13px; height: 13px; }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    nav { padding: 0 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">MIDIA<em>FIX</em></a>
+  <ul class="nav-links">
+    <li><a href="#">Serviços</a></li>
+    <li><a href="#">Segmentos</a></li>
+    <li><a href="#">Cases</a></li>
+    <li><a href="#">Sobre</a></li>
+    <li><a href="#">Contato</a></li>
+  </ul>
+  <a href="#" class="nav-cta">
+    Solicitar Proposta
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"/>
+      <polyline points="12 5 19 12 12 19"/>
+    </svg>
+  </a>
+</nav>
+
+<!-- HERO CANÔNICO (.mx-hero — assets/css/components.css) -->
+<section class="mx-hero">
+  <div class="mx-hero-bg" style="background-image:url('assets/img/hero.jpg'); --hero-position:center 72%;"></div>
+  <div class="mx-hero-overlay"></div>
+  <div class="mx-hero-accent"></div>
+
+  <div class="mx-hero-content">
+    <div class="mx-eyebrow">
+      <div class="mx-eyebrow-line"></div>
+      <span class="mx-eyebrow-text">Comunicação Visual Corporativa</span>
+    </div>
+
+    <h1 class="mx-h1">
+      Sua marca no mundo<br>
+      físico, com o <span class="mx-highlight">padrão</span><br>
+      que ela exige.
+    </h1>
+
+    <p class="mx-body-lg">
+      Projetos de comunicação visual para empresas, redes e corporações
+      que precisam de execução impecável, consistência de marca
+      e um parceiro preparado para escala.
+    </p>
+
+    <div class="mx-hero-actions">
+      <a href="#" class="btn btn-primary btn-md">
+        Solicitar Diagnóstico
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+      <div class="btn-divider"></div>
+      <a href="#" class="btn btn-outline btn-md">Ver Projetos Executados</a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="mx-hero-scroll">
+    <div class="mx-hero-scroll-line"></div>
+    Scroll
+  </div>
+
+  <!-- Callout arquitetônico — opcional, desktop only -->
+  <div class="mx-hero-callout">
+    <div class="mx-hero-callout-line"></div>
+    <div class="mx-hero-callout-card">
+      <strong>Sede própria</strong>
+      <span>Cascavel · Paraná</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAIXA DE MÉTRICAS FUNDIDA (.mx-hero-meta) -->
+<div class="mx-hero-meta">
+  <div class="mx-hero-meta-item">
+    <div class="mx-hero-meta-value"><span class="mx-hero-meta-plus">+</span>16</div>
+    <div class="mx-hero-meta-label">Anos de mercado</div>
+  </div>
+  <div class="mx-hero-meta-item">
+    <div class="mx-hero-meta-value"><span class="mx-hero-meta-plus">+</span>28 mil</div>
+    <div class="mx-hero-meta-label">Projetos executados</div>
+  </div>
+  <div class="mx-hero-meta-item">
+    <div class="mx-hero-meta-value"><span class="mx-hero-meta-plus">+</span>8 mil</div>
+    <div class="mx-hero-meta-label">Clientes atendidos</div>
+  </div>
+  <div class="mx-hero-meta-item">
+    <div class="mx-hero-meta-value"><span class="mx-hero-meta-plus">+</span>500</div>
+    <div class="mx-hero-meta-label">Cidades atendidas</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>MIDIAFIX — Design System & Component Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+
+<style>
+/* Biblioteca de componentes em assets/css/components.css.
+   Abaixo: chrome exclusivo desta página de documentação (.ds-*). */
+
+.ds-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.ds-sidebar {
+  position: fixed;
+  top: 0;
+  width: 240px;
+  height: 100vh;
+  background: var(--mx-surface-1);
+  border-right: 1px solid var(--mx-border-mid);
+  overflow-y: auto;
+  z-index: 50;
+  padding-bottom: 40px;
+}
+.ds-sidebar-logo {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--mx-border-mid);
+  margin-bottom: 8px;
+}
+.ds-sidebar-logo .brand {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--mx-white);
+  letter-spacing: -0.02em;
+}
+.ds-sidebar-logo .brand em { font-style: normal; color: var(--mx-red); }
+.ds-sidebar-logo .version {
+  font-size: 11px;
+  color: var(--mx-gray-300);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+.ds-nav-group { margin-bottom: 4px; }
+.ds-nav-group-label {
+  padding: 14px 28px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mx-gray-100);
+}
+.ds-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 28px;
+  font-size: 13px;
+  color: var(--mx-gray-300);
+  text-decoration: none;
+  transition: color var(--ease-fast), background var(--ease-fast);
+  border-left: 2px solid transparent;
+  cursor: pointer;
+}
+.ds-nav-link:hover {
+  color: var(--mx-white);
+  background: rgba(245,245,245,0.03);
+}
+.ds-nav-link.active {
+  color: var(--mx-white);
+  border-left-color: var(--mx-red);
+  background: rgba(229,57,53,0.06);
+}
+.ds-nav-link .ds-badge {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: rgba(229,57,53,0.15);
+  color: var(--mx-red);
+}
+
+/* Main content */
+.ds-main {
+  margin-left: 240px;
+  min-height: 100vh;
+}
+
+/* Component sections */
+.ds-section {
+  padding: 64px 64px 80px;
+  border-bottom: 1px solid var(--mx-border-mid);
+}
+@media (max-width: 1100px) {
+  .ds-section { padding: 48px 32px 64px; }
+}
+
+.ds-section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.ds-section-title h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--mx-white);
+  letter-spacing: -0.02em;
+}
+.ds-component-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mx-red);
+  letter-spacing: 0.06em;
+  background: rgba(229,57,53,0.08);
+  border: 1px solid var(--mx-border-accent);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.ds-section-desc {
+  font-size: 14px;
+  color: var(--mx-gray-300);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 48px;
+}
+
+/* Preview box */
+.ds-preview {
+  background: var(--mx-surface-2);
+  border: 1px solid var(--mx-border-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.ds-preview-label {
+  padding: 10px 18px;
+  background: var(--mx-surface-1);
+  border-bottom: 1px solid var(--mx-border-mid);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mx-gray-100);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ds-preview-label::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--mx-red);
+  opacity: 0.6;
+}
+.ds-preview-inner { padding: 48px 48px; }
+.ds-preview-inner.flush { padding: 0; }
+.ds-preview-inner.tight { padding: 32px; }
+
+/* Variant label */
+.ds-variant {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mx-gray-100);
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+.ds-variant:first-child { margin-top: 0; }
+
+/* Code block */
+.ds-code {
+  background: var(--mx-surface-1);
+  border: 1px solid var(--mx-border-mid);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--mx-gray-400);
+  line-height: 1.7;
+  overflow-x: auto;
+  tab-size: 2;
+  margin-bottom: 20px;
+}
+.ds-code .kw { color: var(--mx-red); }
+.ds-code .cl { color: #7eb8f0; }
+.ds-code .at { color: #c5a87e; }
+.ds-code .st { color: #82c98d; }
+.ds-code .co { color: var(--mx-gray-100); font-style: italic; }
+
+/* Token grid */
+.ds-token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.ds-token-swatch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ds-swatch {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--mx-border-strong);
+  flex-shrink: 0;
+}
+.ds-token-meta { line-height: 1.4; }
+.ds-token-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mx-gray-400);
+}
+.ds-token-hex {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mx-gray-300);
+}
+
+/* Usage table */
+.ds-usage-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.ds-usage-table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mx-gray-300);
+  border-bottom: 1px solid var(--mx-border-mid);
+}
+.ds-usage-table td {
+  padding: 12px 16px;
+  color: rgba(245,245,245,0.65);
+  border-bottom: 1px solid var(--mx-border-subtle);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.ds-usage-table td:first-child {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mx-red);
+  white-space: nowrap;
+}
+.ds-usage-table tr:last-child td { border-bottom: none; }
+
+/* Header bar for sections */
+.ds-top-bar {
+  position: sticky;
+  top: 0;
+  background: rgba(13,13,13,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--mx-border-mid);
+  padding: 16px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+}
+.ds-top-bar h1 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--mx-white);
+  letter-spacing: -0.01em;
+}
+.ds-top-bar p {
+  font-size: 13px;
+  color: var(--mx-gray-300);
+}
+.ds-top-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--mx-gray-300);
+}
+.ds-status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #4CAF50;
+}
+@media (max-width: 960px) {
+  .ds-body { grid-template-columns: 1fr; }
+  .ds-sidebar { position: relative; width: 100%; height: auto; }
+  .ds-main { margin-left: 0; }
+  .ds-top-bar { padding: 14px 24px; }
+  .ds-section { padding: 40px 24px 56px; }
+}
+</style>
+</head>
+<body>
+
+<div class="ds-body">
+
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<aside class="ds-sidebar">
+  <div class="ds-sidebar-logo">
+    <div class="brand">MIDIA<em>FIX</em></div>
+    <div class="version">Design System v1.0</div>
+  </div>
+
+  <nav>
+    <div class="ds-nav-group">
+      <div class="ds-nav-group-label">Fundação</div>
+      <a class="ds-nav-link active" onclick="scrollTo('tokens')">Tokens &amp; Paleta</a>
+      <a class="ds-nav-link" onclick="scrollTo('typography')">Tipografia</a>
+      <a class="ds-nav-link" onclick="scrollTo('layout')">Layout &amp; Grid</a>
+      <a class="ds-nav-link" onclick="scrollTo('buttons')">Botões</a>
+    </div>
+    <div class="ds-nav-group">
+      <div class="ds-nav-group-label">Componentes</div>
+      <a class="ds-nav-link" onclick="scrollTo('nav')">C-01 · Navegação</a>
+      <a class="ds-nav-link" onclick="scrollTo('hero')">C-05 · Hero Section <span class="ds-badge">Page</span></a>
+      <a class="ds-nav-link" onclick="scrollTo('kpi')">C-06 · KPI / Stats</a>
+      <a class="ds-nav-link" onclick="scrollTo('problem')">C-07 · Problema</a>
+      <a class="ds-nav-link" onclick="scrollTo('split')">C-08 · Split Content</a>
+      <a class="ds-nav-link" onclick="scrollTo('dif')">C-09 · Diferenciais</a>
+      <a class="ds-nav-link" onclick="scrollTo('seg')">C-10 · Segmentos</a>
+      <a class="ds-nav-link" onclick="scrollTo('cases')">C-11 · Cases</a>
+      <a class="ds-nav-link" onclick="scrollTo('process')">C-12 · Processo</a>
+      <a class="ds-nav-link" onclick="scrollTo('faq')">C-13 · FAQ</a>
+      <a class="ds-nav-link" onclick="scrollTo('cta')">C-14 · CTA</a>
+      <a class="ds-nav-link" onclick="scrollTo('testimonial')">C-15 · Depoimentos</a>
+    </div>
+    <div class="ds-nav-group">
+      <div class="ds-nav-group-label">Templates</div>
+      <a class="ds-nav-link" onclick="scrollTo('tpl-service')">Página de Serviço</a>
+      <a class="ds-nav-link" onclick="scrollTo('tpl-segment')">Página de Segmento</a>
+    </div>
+  </nav>
+</aside>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+<main class="ds-main">
+
+  <!-- Top bar -->
+  <div class="ds-top-bar">
+    <div>
+      <h1>MIDIAFIX — Component Library</h1>
+      <p>Todos os componentes seguem o Design System Master</p>
+    </div>
+    <div class="ds-top-status">
+      <div class="ds-status-dot"></div>
+      Componentes: 17 &nbsp;·&nbsp; Templates: 2
+    </div>
+  </div>
+
+  <!-- ── TOKENS ──────────────────────────────────────── -->
+  <section class="ds-section" id="tokens">
+    <div class="ds-section-title">
+      <h2>Tokens de Design</h2>
+      <span class="ds-component-id">--mx-*</span>
+    </div>
+    <p class="ds-section-desc">Variáveis CSS globais que definem a paleta, espaçamento, tipografia e raio de borda. Toda interface MIDIAFIX herda exclusivamente destes tokens.</p>
+
+    <div class="ds-variant">Paleta Principal</div>
+    <div class="ds-token-grid">
+      <div class="ds-token-swatch">
+        <div class="ds-swatch" style="background:#0D0D0D;"></div>
+        <div class="ds-token-meta">
+          <div class="ds-token-name">--mx-surface-0</div>
+          <div class="ds-token-hex">#0D0D0D · Grafite profundo</div>
+        </div>
+      </div>
+      <div class="ds-token-swatch">
+        <div class="ds-swatch" style="background:#161616; border-color:#333;"></div>
+        <div class="ds-token-meta">
+          <div class="ds-token-name">--mx-surface-2</div>
+          <div class="ds-token-hex">#161616 · Seção escura</div>
+        </div>
+      </div>
+      <div class="ds-token-swatch">
+        <div class="ds-swatch" style="background:#222222; border-color:#333;"></div>
+        <div class="ds-token-meta">
+          <div class="ds-token-name">--mx-surface-4</div>
+          <div class="ds-token-hex">#222222 · Card bg</div>
+        </div>
+      </div>
+      <div class="ds-token-swatch">
+        <div class="ds-swatch" style="background:#E53935; border-color:#E53935;"></div>
+        <div class="ds-token-meta">
+          <div class="ds-token-name">--mx-red</div>
+          <div class="ds-token-hex">#E53935 · Vermelho MIDIAFIX</div>
+        </div>
+      </div>
+      <div class="ds-token-swatch">
+        <div class="ds-swatch" style="background:#F5F5F5; border-color:#444;"></div>
+        <div class="ds-token-meta">
+          <div class="ds-token-name">--mx-white</div>
+          <div class="ds-token-hex">#F5F5F5 · Branco suave</div>
+        </div>
+      </div>
+      <div class="ds-token-swatch">
+        <div class="ds-swatch" style="background:#9E9E9E; border-color:#444;"></div>
+        <div class="ds-token-meta">
+          <div class="ds-token-name">--mx-gray-300</div>
+          <div class="ds-token-hex">#9E9E9E · Cinza claro</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-variant">Regras de Uso do Vermelho</div>
+    <table class="ds-usage-table">
+      <tr><th>Contexto</th><th>Uso correto</th><th>Nunca usar</th></tr>
+      <tr><td>--mx-red em CTA</td><td>Botão primário (fundo sólido, texto branco)</td><td>Botão secundário</td></tr>
+      <tr><td>--mx-red em texto</td><td>Eyebrow, números pequenos, numeração de cards</td><td>Palavras grandes no H1 sobre fundo claro</td></tr>
+      <tr><td>--mx-red em detalhe</td><td>Linha de sublinhado, borda lateral, ponto ativo</td><td>Blocos inteiros de cor</td></tr>
+      <tr><td>--mx-red em badge</td><td>Tag pill, label de segmento em card dark</td><td>Fundo de seção, fundo de card</td></tr>
+    </table>
+  </section>
+
+  <!-- ── TYPOGRAPHY ──────────────────────────────────── -->
+  <section class="ds-section" id="typography">
+    <div class="ds-section-title">
+      <h2>Tipografia</h2>
+      <span class="ds-component-id">.mx-h1 → .mx-caption</span>
+    </div>
+    <p class="ds-section-desc">DM Sans para títulos e display. IBM Plex Sans para corpo e texto institucional. IBM Plex Mono para código e referências técnicas.</p>
+
+    <div class="ds-preview">
+      <div class="ds-preview-label">Hierarquia de Títulos</div>
+      <div class="ds-preview-inner">
+        <p class="mx-h1" style="margin-bottom:24px;">Comunicação visual corporativa.</p>
+        <p class="mx-h2" style="margin-bottom:20px;">Estrutura e padrão para redes e franquias</p>
+        <p class="mx-h3" style="margin-bottom:16px;">Execução técnica que sustenta o crescimento</p>
+        <p class="mx-h4" style="margin-bottom:12px;">Fachadas, sinalização, envelopamento e totens</p>
+        <p class="mx-h5">Projetos executados com documentação e relatório</p>
+      </div>
+    </div>
+
+    <div class="ds-preview">
+      <div class="ds-preview-label">Eyebrow + Heading (padrão de seção)</div>
+      <div class="ds-preview-inner">
+        <div class="mx-eyebrow">
+          <div class="mx-eyebrow-line"></div>
+          <span class="mx-eyebrow-text">Fachadas em ACM</span>
+        </div>
+        <h2 class="mx-h2" style="margin-bottom:16px;">A fachada é o primeiro dado que o mercado coleta sobre a sua empresa</h2>
+        <p class="mx-body-lg" style="max-width:540px;">Projetos de fachada em ACM com estrutura, acabamento e prazo. Para empresas que entendem que a comunicação visual é parte do produto.</p>
+      </div>
+    </div>
+
+    <div class="ds-preview">
+      <div class="ds-preview-label">Highlight (palavra em destaque com sublinhado)</div>
+      <div class="ds-preview-inner">
+        <h1 class="mx-h1">Comunicação visual<br>executada com <span class="mx-highlight">padrão</span>.</h1>
+      </div>
+    </div>
+
+    <div class="ds-preview">
+      <div class="ds-preview-label">Tags e Labels</div>
+      <div class="ds-preview-inner" style="display:flex; gap:12px; flex-wrap:wrap;">
+        <span class="mx-tag">Fachadas em ACM</span>
+        <span class="mx-tag">Painéis de LED</span>
+        <span class="mx-tag mx-tag-ghost">Segmento: Varejo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LAYOUT ──────────────────────────────────────── -->
+  <section class="ds-section" id="layout">
+    <div class="ds-section-title">
+      <h2>Layout &amp; Grid</h2>
+      <span class="ds-component-id">.mx-container, .mx-section</span>
+    </div>
+    <p class="ds-section-desc">Containers, wrappers de seção e variantes de superfície. Toda seção herda de uma das três variantes de fundo.</p>
+    <table class="ds-usage-table">
+      <tr><th>Classe</th><th>Max-width</th><th>Uso</th></tr>
+      <tr><td>.mx-container</td><td>1200px</td><td>Padrão para todas as seções</td></tr>
+      <tr><td>.mx-container-wide</td><td>1440px</td><td>Hero, imagens full-bleed, galerías</td></tr>
+      <tr><td>.mx-container-narrow</td><td>800px</td><td>FAQ, textos longos, artigos</td></tr>
+      <tr><td>.mx-section</td><td>—</td><td>Fundo grafite (#1A1A1A) · padrão</td></tr>
+      <tr><td>.mx-section-dark</td><td>—</td><td>Fundo #161616 · alternado</td></tr>
+      <tr><td>.mx-section-deep</td><td>—</td><td>Fundo #111111 · intro/CTA</td></tr>
+    </table>
+  </section>
+
+  <!-- ── BUTTONS ─────────────────────────────────────── -->
+  <section class="ds-section" id="buttons">
+    <div class="ds-section-title">
+      <h2>Botões</h2>
+      <span class="ds-component-id">.btn</span>
+    </div>
+    <p class="ds-section-desc">Três estilos × três tamanhos. O vermelho aparece exclusivamente no btn-primary. Nunca usar dois botões primários lado a lado.</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Variantes</div>
+      <div class="ds-preview-inner" style="display:flex; gap:14px; flex-wrap:wrap; align-items:center;">
+        <a class="btn btn-primary btn-lg">Solicitar Diagnóstico
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a class="btn btn-outline btn-lg">Ver Projetos</a>
+        <a class="btn btn-ghost btn-md">Saiba mais</a>
+        <div class="btn-divider"></div>
+        <a class="btn btn-primary btn-sm">CTA compacto</a>
+        <a class="btn btn-outline btn-sm">Outline SM</a>
+      </div>
+    </div>
+    <table class="ds-usage-table">
+      <tr><th>Classe</th><th>Uso</th><th>Hierarquia</th></tr>
+      <tr><td>.btn-primary</td><td>CTA principal da seção. Um por seção.</td><td>1º</td></tr>
+      <tr><td>.btn-outline</td><td>Ação secundária ao lado do primário</td><td>2º</td></tr>
+      <tr><td>.btn-ghost</td><td>Ações terciárias, links discretos</td><td>3º</td></tr>
+    </table>
+  </section>
+
+  <!-- ── C-01 NAV ──────────────────────────────────── -->
+  <section class="ds-section" id="nav">
+    <div class="ds-section-title">
+      <h2>Navegação</h2>
+      <span class="ds-component-id">C-01 · .mx-nav</span>
+    </div>
+    <p class="ds-section-desc">Navbar fixa com blur. Logo à esquerda, links ao centro, CTA à direita. Links colapsam em mobile (abaixo de 960px).</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Preview</div>
+      <div class="ds-preview-inner flush">
+        <nav style="position:relative; top:auto; background:rgba(13,13,13,0.98); height:72px; padding:0 32px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #2C2C2C;">
+          <a class="mx-logo">MIDIA<em>FIX</em></a>
+          <ul class="mx-nav-links">
+            <li><a>Serviços</a></li>
+            <li><a>Segmentos</a></li>
+            <li><a>Cases</a></li>
+            <li><a class="active">Fachadas ACM</a></li>
+            <li><a>Contato</a></li>
+          </ul>
+          <a class="btn btn-primary nav-cta btn-sm">Solicitar Proposta</a>
+        </nav>
+      </div>
+    </div>
+    <div class="ds-code"><span class="co">/* Implementação */</span>
+&lt;<span class="kw">nav</span> class=<span class="st">"mx-nav"</span> id=<span class="st">"main-nav"</span>&gt;
+  &lt;<span class="kw">a</span> href=<span class="st">"/"</span> class=<span class="st">"mx-logo"</span>&gt;MIDIA&lt;<span class="kw">em</span>&gt;FIX&lt;/<span class="kw">em</span>&gt;&lt;/<span class="kw">a</span>&gt;
+  &lt;<span class="kw">ul</span> class=<span class="st">"mx-nav-links"</span>&gt;
+    &lt;<span class="kw">li</span>&gt;&lt;<span class="kw">a</span> href=<span class="st">"#"</span>&gt;Serviços&lt;/<span class="kw">a</span>&gt;&lt;/<span class="kw">li</span>&gt;
+    <span class="co">/* ... */</span>
+  &lt;/<span class="kw">ul</span>&gt;
+  &lt;<span class="kw">a</span> href=<span class="st">"#contato"</span> class=<span class="st">"btn btn-primary btn-sm"</span>&gt;Solicitar Proposta&lt;/<span class="kw">a</span>&gt;
+&lt;/<span class="kw">nav</span>&gt;</div>
+  </section>
+
+  <!-- ── C-05 HERO ──────────────────────────────────── -->
+  <section class="ds-section" id="hero">
+    <div class="ds-section-title">
+      <h2>Hero Section</h2>
+      <span class="ds-component-id">C-05 · .mx-hero</span>
+    </div>
+    <p class="ds-section-desc">Hero corporativo premium com overlay multi-camada (profundidade), barra de acento e movimento sutil (entrada + zoom lento, respeitando <code style="font-family:var(--font-mono);font-size:12px;color:var(--mx-red)">prefers-reduced-motion</code>). Sub-componentes opcionais: <code style="font-family:var(--font-mono);font-size:12px;color:var(--mx-red)">.mx-hero-meta</code> (faixa de métricas fundida) e <code style="font-family:var(--font-mono);font-size:12px;color:var(--mx-red)">.mx-hero-callout</code>. Imagem via <code style="font-family:var(--font-mono);font-size:12px;color:var(--mx-red)">--hero-image</code>.</p>
+
+    <div class="ds-preview">
+      <div class="ds-preview-label">Variante Padrão (alinhado esquerda)</div>
+      <div class="ds-preview-inner flush" style="min-height:380px; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding-bottom:48px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,0.4) 0%,rgba(10,10,10,0.75) 50%,#0d0d0d 100%),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=60') center/cover;"></div>
+        <div style="position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(to bottom,transparent,#E53935 30%,#E53935 70%,transparent);opacity:.45;"></div>
+        <div style="position:relative;z-index:2;padding:0 48px;max-width:680px;">
+          <div class="mx-eyebrow" style="margin-bottom:24px;">
+            <div class="mx-eyebrow-line"></div>
+            <span class="mx-eyebrow-text">Fachadas em ACM</span>
+          </div>
+          <h1 class="mx-h1" style="font-size:clamp(32px,4.5vw,54px);margin-bottom:18px;">Fachadas corporativas que<br>sustentam a <span class="mx-highlight">credibilidade</span> da marca.</h1>
+          <p class="mx-body-lg" style="margin-bottom:32px;max-width:480px;font-size:16px;">Execução técnica em ACM para redes, franquias e corporações que exigem padrão, durabilidade e cumprimento de prazo.</p>
+          <div class="mx-hero-actions">
+            <a class="btn btn-primary btn-md">Solicitar Diagnóstico
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <div class="btn-divider"></div>
+            <a class="btn btn-outline btn-md">Ver Projetos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-code"><span class="co">/* Hero canônico — imagem via --hero-image; overlay multi-camada;
+   .mx-hero-callout e .mx-hero-meta são opcionais */</span>
+&lt;<span class="kw">section</span> class=<span class="st">"mx-hero"</span>&gt;
+  &lt;<span class="kw">div</span> class=<span class="st">"mx-hero-bg"</span> style=<span class="st">"--hero-image:url('SUA_IMAGEM.jpg')"</span>&gt;&lt;/<span class="kw">div</span>&gt;
+  &lt;<span class="kw">div</span> class=<span class="st">"mx-hero-overlay"</span>&gt;&lt;/<span class="kw">div</span>&gt;
+  &lt;<span class="kw">div</span> class=<span class="st">"mx-hero-accent"</span>&gt;&lt;/<span class="kw">div</span>&gt;
+  &lt;<span class="kw">div</span> class=<span class="st">"mx-hero-content"</span>&gt;
+    &lt;<span class="kw">div</span> class=<span class="st">"mx-eyebrow"</span>&gt;
+      &lt;<span class="kw">div</span> class=<span class="st">"mx-eyebrow-line"</span>&gt;&lt;/<span class="kw">div</span>&gt;
+      &lt;<span class="kw">span</span> class=<span class="st">"mx-eyebrow-text"</span>&gt;NOME DO SERVIÇO&lt;/<span class="kw">span</span>&gt;
+    &lt;/<span class="kw">div</span>&gt;
+    &lt;<span class="kw">h1</span> class=<span class="st">"mx-h1"</span>&gt;Headline forte com &lt;<span class="kw">span</span> class=<span class="st">"mx-highlight"</span>&gt;destaque&lt;/<span class="kw">span</span>&gt;.&lt;/<span class="kw">h1</span>&gt;
+    &lt;<span class="kw">p</span> class=<span class="st">"mx-body-lg"</span>&gt;Subtítulo...&lt;/<span class="kw">p</span>&gt;
+    &lt;<span class="kw">div</span> class=<span class="st">"mx-hero-actions"</span>&gt;
+      &lt;<span class="kw">a</span> class=<span class="st">"btn btn-primary btn-md"</span>&gt;CTA Principal&lt;/<span class="kw">a</span>&gt;
+      &lt;<span class="kw">div</span> class=<span class="st">"btn-divider"</span>&gt;&lt;/<span class="kw">div</span>&gt;
+      &lt;<span class="kw">a</span> class=<span class="st">"btn btn-outline btn-md"</span>&gt;CTA Secundário&lt;/<span class="kw">a</span>&gt;
+    &lt;/<span class="kw">div</span>&gt;
+  &lt;/<span class="kw">div</span>&gt;
+  &lt;<span class="kw">div</span> class=<span class="st">"mx-hero-scroll"</span>&gt;&lt;<span class="kw">div</span> class=<span class="st">"mx-hero-scroll-line"</span>&gt;&lt;/<span class="kw">div</span>&gt; Scroll&lt;/<span class="kw">div</span>&gt;
+  &lt;<span class="co">!-- opcional: callout arquitetônico (desktop) --</span>&gt;
+  &lt;<span class="kw">div</span> class=<span class="st">"mx-hero-callout"</span>&gt;...&lt;/<span class="kw">div</span>&gt;
+&lt;/<span class="kw">section</span>&gt;
+<span class="co">/* opcional: faixa de métricas fundida, logo após o hero */</span>
+&lt;<span class="kw">div</span> class=<span class="st">"mx-hero-meta"</span>&gt;...&lt;/<span class="kw">div</span>&gt;</div>
+  </section>
+
+  <!-- ── C-06 KPI ───────────────────────────────────── -->
+  <section class="ds-section" id="kpi">
+    <div class="ds-section-title">
+      <h2>KPI / Stats Bar</h2>
+      <span class="ds-component-id">C-06 · .mx-kpi-bar</span>
+    </div>
+    <p class="ds-section-desc">Barra de estatísticas com 4 colunas. Herda o fundo escuro da hero. Customizável com qualquer número de métricas.</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Variante Full Bar</div>
+      <div class="ds-preview-inner flush">
+        <div class="mx-kpi-bar" style="border-top:none;">
+          <div class="mx-kpi-grid" style="max-width:100%;">
+            <div class="mx-kpi-item">
+              <div class="mx-kpi-value">18<sup>+</sup></div>
+              <div class="mx-kpi-label">Anos de mercado</div>
+            </div>
+            <div class="mx-kpi-item">
+              <div class="mx-kpi-value">4.200<sup>+</sup></div>
+              <div class="mx-kpi-label">Projetos executados</div>
+            </div>
+            <div class="mx-kpi-item">
+              <div class="mx-kpi-value">380<sup>+</sup></div>
+              <div class="mx-kpi-label">Empresas atendidas</div>
+            </div>
+            <div class="mx-kpi-item">
+              <div class="mx-kpi-value">47</div>
+              <div class="mx-kpi-label">Cidades de atuação</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-variant">Strip compacto (dentro de seção)</div>
+    <div class="ds-preview">
+      <div class="ds-preview-label">KPI Strip</div>
+      <div class="ds-preview-inner flush">
+        <div class="mx-kpi-strip" style="border:1px solid var(--mx-border-strong); border-radius:var(--radius-lg); overflow:hidden;">
+          <div class="mx-kpi-strip-item"><strong>340</strong><span>Veículos envelopados</span></div>
+          <div class="mx-kpi-strip-item"><strong>90 dias</strong><span>Prazo de execução</span></div>
+          <div class="mx-kpi-strip-item"><strong>3 bases</strong><span>Regiões atendidas</span></div>
+          <div class="mx-kpi-strip-item"><strong>100%</strong><span>Dentro do prazo</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── C-09 DIFERENCIAIS ──────────────────────────── -->
+  <section class="ds-section" id="dif">
+    <div class="ds-section-title">
+      <h2>Diferenciais</h2>
+      <span class="ds-component-id">C-09 · .mx-dif-grid</span>
+    </div>
+    <p class="ds-section-desc">Grid de cards numerados com borda vermelha no hover. Configurável em 2, 3 ou 4 colunas. Cada página de serviço usa 3–6 diferenciais.</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Variante 3 colunas com numeração</div>
+      <div class="ds-preview-inner tight">
+        <div class="mx-dif-grid">
+          <div class="mx-dif-card">
+            <div class="mx-dif-num">01</div>
+            <h3>Capacidade para Projetos de Escala</h3>
+            <p>Equipe própria e produção integrada para atender redes com dezenas de pontos sem perda de padrão.</p>
+          </div>
+          <div class="mx-dif-card">
+            <div class="mx-dif-num">02</div>
+            <h3>Gestão de Projeto como Método</h3>
+            <p>Cada projeto tem gerente responsável, cronograma aprovado e documentação fotográfica de entrega.</p>
+          </div>
+          <div class="mx-dif-card">
+            <div class="mx-dif-num">03</div>
+            <h3>Consistência de Marca em Campo</h3>
+            <p>Do arquivo digital à peça instalada, aplicamos o mesmo padrão em qualquer ponto do país.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-variant">Variante com ícone (2 colunas)</div>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Ícone + Título + Texto</div>
+      <div class="ds-preview-inner tight">
+        <div class="mx-dif-grid cols-2">
+          <div class="mx-dif-card">
+            <div class="mx-dif-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3>Aprovação de Amostra Piloto</h3>
+            <p>Antes de qualquer tiragem em escala, produzimos amostra aprovada pela equipe do cliente.</p>
+          </div>
+          <div class="mx-dif-card">
+            <div class="mx-dif-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <h3>Relatório Fotográfico por Unidade</h3>
+            <p>Documentação completa de cada instalação entregue, com fotos antes e depois.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><span class="co">/* Trocar cols-2, cols-3 ou cols-4 conforme necessidade */</span>
+&lt;<span class="kw">div</span> class=<span class="st">"mx-dif-grid cols-3"</span>&gt;
+  &lt;<span class="kw">div</span> class=<span class="st">"mx-dif-card"</span>&gt;
+    &lt;<span class="kw">div</span> class=<span class="st">"mx-dif-num"</span>&gt;01&lt;/<span class="kw">div</span>&gt;
+    &lt;<span class="kw">h3</span>&gt;Título&lt;/<span class="kw">h3</span>&gt;
+    &lt;<span class="kw">p</span>&gt;Descrição...&lt;/<span class="kw">p</span>&gt;
+  &lt;/<span class="kw">div</span>&gt;
+&lt;/<span class="kw">div</span>&gt;</div>
+  </section>
+
+  <!-- ── C-10 SEGMENTOS ──────────────────────────────── -->
+  <section class="ds-section" id="seg">
+    <div class="ds-section-title">
+      <h2>Cards de Segmento</h2>
+      <span class="ds-component-id">C-10 · .mx-seg-grid</span>
+    </div>
+    <p class="ds-section-desc">Cards com hover de elevação e mudança de cor do ícone. Usados na seção "Segmentos atendidos" em todas as páginas de serviço.</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Grid 4 colunas</div>
+      <div class="ds-preview-inner tight">
+        <div class="mx-seg-grid">
+          <div class="mx-seg-card">
+            <div class="mx-seg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            </div>
+            <h3>Franquias e Redes</h3>
+            <p>Padronização visual em escala para redes em expansão.</p>
+          </div>
+          <div class="mx-seg-card">
+            <div class="mx-seg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            </div>
+            <h3>Supermercados</h3>
+            <p>Comunicação interna e fachadas para redes de varejo alimentar.</p>
+          </div>
+          <div class="mx-seg-card">
+            <div class="mx-seg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <h3>Clínicas e Saúde</h3>
+            <p>Ambientação e sinalização técnica para ambientes regulados.</p>
+          </div>
+          <div class="mx-seg-card">
+            <div class="mx-seg-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
+            </div>
+            <h3>Indústria</h3>
+            <p>Identidade visual aplicada em plantas, galpões e frotas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── C-11 CASES ─────────────────────────────────── -->
+  <section class="ds-section" id="cases">
+    <div class="ds-section-title">
+      <h2>Cards de Case</h2>
+      <span class="ds-component-id">C-11 · .mx-cases-grid</span>
+    </div>
+    <p class="ds-section-desc">Cards com imagem, badge de segmento, copy e métricas. Variante "featured" ocupa 2 colunas com layout horizontal imagem/texto.</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Grid 3 colunas + card featured</div>
+      <div class="ds-preview-inner tight">
+        <div class="mx-cases-grid" style="grid-template-columns: repeat(3,1fr);">
+          <div class="mx-case-card featured" style="grid-column:span 2;">
+            <div class="mx-case-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=70" alt="">
+              <span class="mx-case-seg">Franquia Nacional</span>
+            </div>
+            <div class="mx-case-body" style="padding:32px;">
+              <h3>Padronização de 84 unidades em 6 meses</h3>
+              <p>Fachadas, sinalização interna e PDV para rede varejista em expansão nacional. Execução com equipe própria e relatório por unidade.</p>
+              <div class="mx-case-meta">
+                <div class="mx-case-stat"><strong>84</strong><span>Unidades</span></div>
+                <div class="mx-case-stat"><strong>6 meses</strong><span>Prazo</span></div>
+                <div class="mx-case-stat"><strong>100%</strong><span>No prazo</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mx-case-card">
+            <div class="mx-case-img">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=500&q=70" alt="">
+              <span class="mx-case-seg">Indústria</span>
+            </div>
+            <div class="mx-case-body">
+              <h3>Envelopamento de frota com 340 veículos</h3>
+              <p>Padronização total da frota leve e pesada em 90 dias, 3 bases.</p>
+              <div class="mx-case-meta">
+                <div class="mx-case-stat"><strong>340</strong><span>Veículos</span></div>
+                <div class="mx-case-stat"><strong>90 dias</strong><span>Execução</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── C-12 PROCESSO ──────────────────────────────── -->
+  <section class="ds-section" id="process">
+    <div class="ds-section-title">
+      <h2>Processo / Timeline</h2>
+      <span class="ds-component-id">C-12 · .mx-process-list</span>
+    </div>
+    <p class="ds-section-desc">Duas variantes: tabela horizontal de etapas (padrão) e timeline vertical com conectores. A tabela funciona melhor para processos de 4–8 etapas.</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Tabela de Processo</div>
+      <div class="ds-preview-inner flush">
+        <div class="mx-process-list" style="border-radius:0; border-left:none; border-right:none;">
+          <div class="mx-process-step">
+            <div class="mx-step-num"><div class="process-num">01</div></div>
+            <div class="mx-step-body">
+              <h3>Diagnóstico e Briefing Técnico</h3>
+              <p>Análise de identidade visual, levantamento de pontos e visita técnica quando necessário.</p>
+            </div>
+            <div class="mx-step-phase"><span class="mx-step-phase-pill">Estratégia</span></div>
+          </div>
+          <div class="mx-process-step">
+            <div class="mx-step-num"><div class="process-num">02</div></div>
+            <div class="mx-step-body">
+              <h3>Proposta Técnica e Cronograma</h3>
+              <p>Especificações de material, prazos por fase e estimativa com memória de cálculo.</p>
+            </div>
+            <div class="mx-step-phase"><span class="mx-step-phase-pill">Planejamento</span></div>
+          </div>
+          <div class="mx-process-step">
+            <div class="mx-step-num"><div class="process-num">03</div></div>
+            <div class="mx-step-body">
+              <h3>Produção com Inspeção de Qualidade</h3>
+              <p>Produção interna com checagem de cor, corte e acabamento antes da saída.</p>
+            </div>
+            <div class="mx-step-phase"><span class="mx-step-phase-pill">Produção</span></div>
+          </div>
+          <div class="mx-process-step">
+            <div class="mx-step-num"><div class="process-num">04</div></div>
+            <div class="mx-step-body">
+              <h3>Instalação e Relatório de Entrega</h3>
+              <p>Instalação técnica documentada com relatório fotográfico por unidade.</p>
+            </div>
+            <div class="mx-step-phase"><span class="mx-step-phase-pill">Encerramento</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── C-13 FAQ ───────────────────────────────────── -->
+  <section class="ds-section" id="faq">
+    <div class="ds-section-title">
+      <h2>FAQ / Accordion</h2>
+      <span class="ds-component-id">C-13 · .mx-accordion</span>
+    </div>
+    <p class="ds-section-desc">Layout dois terços: intro à esquerda, accordion à direita. Fundamental para SEO e GEO. Cada página de serviço deve ter no mínimo 5 perguntas específicas do serviço.</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">FAQ com layout split</div>
+      <div class="ds-preview-inner tight">
+        <div class="mx-faq-layout">
+          <div>
+            <div class="mx-eyebrow"><div class="mx-eyebrow-line"></div><span class="mx-eyebrow-text">Perguntas Frequentes</span></div>
+            <h2 class="mx-h3" style="margin-bottom:14px;">O que você precisa saber antes de contratar</h2>
+            <p class="mx-body-sm">Respondemos as dúvidas mais estratégicas sobre execução, prazo e capacidade.</p>
+          </div>
+          <div class="mx-accordion">
+            <div class="mx-accordion-item open">
+              <button class="mx-accordion-trigger" type="button">
+                <span>Vocês atendem projetos fora do estado?</span>
+                <div class="mx-accordion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </div>
+              </button>
+              <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Sim. Possuímos estrutura logística e equipes habilitadas em mais de 47 cidades. Para projetos multi-estaduais, montamos plano de logística dedicado com supervisão centralizada.</div></div>
+            </div>
+            <div class="mx-accordion-item">
+              <button class="mx-accordion-trigger" type="button">
+                <span>Qual o prazo mínimo para um projeto de fachada em ACM?</span>
+                <div class="mx-accordion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </div>
+              </button>
+              <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Depende da complexidade da estrutura e volume de pontos. Projetos de unidade única são entregues entre 10 e 21 dias úteis. O prazo é definido na proposta técnica após visita.</div></div>
+            </div>
+            <div class="mx-accordion-item">
+              <button class="mx-accordion-trigger" type="button">
+                <span>A MIDIAFIX faz o projeto arquitetônico da fachada?</span>
+                <div class="mx-accordion-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </div>
+              </button>
+              <div class="mx-accordion-body"><div class="mx-accordion-body-inner">Desenvolvemos o projeto executivo completo, incluindo memorial descritivo e especificação técnica de materiais. Para projetos que exigem ART, trabalhamos com engenheiro responsável credenciado.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── C-14 CTA ───────────────────────────────────── -->
+  <section class="ds-section" id="cta">
+    <div class="ds-section-title">
+      <h2>CTA Section</h2>
+      <span class="ds-component-id">C-14 · .mx-cta</span>
+    </div>
+    <p class="ds-section-desc">Três variantes de CTA. Usar a variante full como encerramento de página. A banner é ideal para inserção mid-page. O strip para páginas curtas.</p>
+
+    <div class="ds-variant">CTA Banner (mid-page)</div>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Inline Banner</div>
+      <div class="ds-preview-inner tight">
+        <div class="mx-cta-banner">
+          <div class="mx-cta-banner-text">
+            <h3>Pronto para um parceiro à altura do seu projeto?</h3>
+            <p>Diagnóstico técnico sem compromisso. Nossa equipe analisa e apresenta proposta estruturada.</p>
+          </div>
+          <div class="mx-cta-banner-actions">
+            <a class="btn btn-primary btn-md">Solicitar Diagnóstico</a>
+            <a class="btn btn-ghost btn-md">Falar com Especialista</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-variant">CTA Full (encerramento de página)</div>
+    <div class="ds-preview">
+      <div class="ds-preview-label">CTA Full Width</div>
+      <div class="ds-preview-inner flush" style="min-height:300px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; text-align:center;">
+        <div style="position:absolute;inset:0;background:linear-gradient(rgba(13,13,13,0.9),rgba(13,13,13,0.9)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=50') center/cover;"></div>
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#E53935,transparent);"></div>
+        <div style="position:relative;z-index:2;padding:0 40px;">
+          <span class="mx-tag" style="margin-bottom:24px;">Próximo Passo</span>
+          <h2 class="mx-h2" style="margin-bottom:16px;font-size:clamp(24px,3.5vw,40px);">Sua estrutura precisa transmitir<br>o nível do seu negócio.</h2>
+          <p class="mx-body-lg" style="max-width:420px;margin:0 auto 36px;font-size:15px;">Agende um diagnóstico e receba uma proposta técnica em até 48h.</p>
+          <div class="mx-cta-actions">
+            <a class="btn btn-primary btn-lg">Solicitar Diagnóstico
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a class="btn btn-outline btn-lg">Falar com Especialista</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── C-15 TESTIMONIAL ───────────────────────────── -->
+  <section class="ds-section" id="testimonial">
+    <div class="ds-section-title">
+      <h2>Depoimentos</h2>
+      <span class="ds-component-id">C-15 · .mx-testimonial</span>
+    </div>
+    <p class="ds-section-desc">Cards de depoimento com aspas decorativas, texto e autor. Usar em grid de 3 colunas ou isolado como destaque.</p>
+    <div class="ds-preview">
+      <div class="ds-preview-label">Grid 3 depoimentos</div>
+      <div class="ds-preview-inner tight">
+        <div class="mx-testimonials-grid" style="grid-template-columns: repeat(3,1fr);">
+          <div class="mx-testimonial">
+            <p class="mx-testimonial-text">"A MIDIAFIX entregou 22 unidades dentro do prazo, com padrão idêntico entre todas. Isso eliminou o retrabalho que tínhamos com fornecedores anteriores."</p>
+            <div class="mx-testimonial-author">
+              <div class="mx-testimonial-avatar"></div>
+              <div>
+                <div class="mx-testimonial-name">Carlos Andrade</div>
+                <div class="mx-testimonial-role">Diretor de Expansão · Rede varejista</div>
+              </div>
+            </div>
+          </div>
+          <div class="mx-testimonial">
+            <p class="mx-testimonial-text">"O processo deles é diferente. Existe um gerente responsável, existe cronograma, existe documentação. Parece óbvio, mas nenhum outro fornecedor fazia isso."</p>
+            <div class="mx-testimonial-author">
+              <div class="mx-testimonial-avatar"></div>
+              <div>
+                <div class="mx-testimonial-name">Fernanda Lopes</div>
+                <div class="mx-testimonial-role">Gerente de Marketing · Cooperativa</div>
+              </div>
+            </div>
+          </div>
+          <div class="mx-testimonial">
+            <p class="mx-testimonial-text">"Contratamos para 1 unidade piloto. Hoje trabalhamos com a MIDIAFIX em 14 unidades e já planejamos a expansão das próximas 20."</p>
+            <div class="mx-testimonial-author">
+              <div class="mx-testimonial-avatar"></div>
+              <div>
+                <div class="mx-testimonial-name">Ricardo Melo</div>
+                <div class="mx-testimonial-role">CEO · Rede de clínicas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TEMPLATE: PÁGINA DE SERVIÇO ────────────────── -->
+  <section class="ds-section" id="tpl-service">
+    <div class="ds-section-title">
+      <h2>Template: Página de Serviço</h2>
+      <span class="ds-component-id">TPL-01</span>
+    </div>
+    <p class="ds-section-desc">Estrutura padrão para criar qualquer página de serviço — Fachadas ACM, Painéis de LED, Letra Caixa, Envelopamento, Totens.</p>
+
+    <div class="ds-preview">
+      <div class="ds-preview-label">Estrutura de seções — ordem obrigatória</div>
+      <div class="ds-preview-inner">
+        <div style="display:flex; flex-direction:column; gap:2px;">
+          <!-- cada linha da estrutura -->
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-4); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--mx-border-strong);">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">01</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">mx-nav</strong> <span class="mx-body-sm">Navegação fixa — igual em todas as páginas</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-01</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-4); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">02</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">mx-hero</strong> <span class="mx-body-sm">Hero com imagem do serviço, eyebrow + H1 + highlight + CTAs</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-05</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-4); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">03</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">mx-kpi-bar</strong> <span class="mx-body-sm">3–4 métricas do serviço específico (projetos, materiais, prazo médio)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-06</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-2); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">04</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">Problema</strong> <span class="mx-body-sm">mx-section-dark · mx-problem-grid (texto + pain list)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-07</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-4); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">05</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">Solução</strong> <span class="mx-body-sm">mx-section · mx-split (imagem + texto + mx-check-list)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-08</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-2); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">06</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">Diferenciais</strong> <span class="mx-body-sm">mx-section-dark · mx-dif-grid cols-3 (6 cards numerados)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-09</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-4); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">07</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">Segmentos</strong> <span class="mx-body-sm">mx-section · mx-seg-grid cols-4 (segmentos que usam o serviço)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-10</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-2); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">08</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">Cases</strong> <span class="mx-body-sm">mx-section-dark · mx-cases-grid (1 featured + 1 regular)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-11</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-4); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">09</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">Processo</strong> <span class="mx-body-sm">mx-section · mx-process-list (4–6 etapas do serviço)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-12</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-2); border:1px solid var(--mx-border-strong); border-top:none;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">10</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">FAQ</strong> <span class="mx-body-sm">mx-section-dark · mx-faq-layout (5–8 perguntas do serviço)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-13</span>
+          </div>
+          <div style="display:grid; grid-template-columns:32px 1fr 80px; gap:16px; align-items:center; padding:16px 20px; background:var(--mx-surface-4); border:1px solid var(--mx-border-strong); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md);">
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--mx-red);">11</span>
+            <div><strong style="font-size:14px;color:var(--mx-white);">CTA Final</strong> <span class="mx-body-sm">mx-cta full (imagem de fundo + linha vermelha + botões)</span></div>
+            <span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mx-gray-300);">C-14</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-variant">Customização por serviço</div>
+    <table class="ds-usage-table">
+      <tr><th>Página</th><th>Hero Image</th><th>Eyebrow</th><th>KPI 1</th><th>KPI 2</th></tr>
+      <tr><td>Fachadas ACM</td><td>Foto de fachada instalada</td><td>Fachadas em ACM</td><td>Projetos de fachada</td><td>Redes atendidas</td></tr>
+      <tr><td>Painéis LED</td><td>Painel iluminado noturno</td><td>Painéis de LED</td><td>m² instalados</td><td>Horas de operação</td></tr>
+      <tr><td>Letra Caixa</td><td>Letra caixa iluminada</td><td>Letra Caixa</td><td>Projetos entregues</td><td>Tipos de iluminação</td></tr>
+      <tr><td>Envelopamento</td><td>Frota envelopada</td><td>Envelopamento de Frota</td><td>Veículos envelopados</td><td>Prazo médio</td></tr>
+      <tr><td>Franquias</td><td>Rede de lojas padronizadas</td><td>Comunicação para Franquias</td><td>Redes atendidas</td><td>Unidades padronizadas</td></tr>
+    </table>
+  </section>
+
+  <!-- ── TEMPLATE: SEGMENTO ─────────────────────────── -->
+  <section class="ds-section" id="tpl-segment" style="border-bottom:none;">
+    <div class="ds-section-title">
+      <h2>Template: Página de Segmento</h2>
+      <span class="ds-component-id">TPL-02</span>
+    </div>
+    <p class="ds-section-desc">Estrutura para páginas voltadas a segmentos específicos — Cooperativas, Supermercados, Hospitais, Postos. Foco no problema do setor e solução Midiafix.</p>
+    <table class="ds-usage-table">
+      <tr><th>Seção</th><th>Componente</th><th>Personalização</th></tr>
+      <tr><td>Hero</td><td>C-05</td><td>Imagem do ambiente do segmento · copy sobre o mercado</td></tr>
+      <tr><td>Contexto do Setor</td><td>C-08 Split</td><td>Texto sobre o que o segmento precisa de comunicação visual</td></tr>
+      <tr><td>Serviços aplicáveis</td><td>C-09 Dif grid cols-2</td><td>Cards dos 4–6 serviços relevantes para o segmento</td></tr>
+      <tr><td>Cases do setor</td><td>C-11</td><td>Apenas cases do mesmo segmento</td></tr>
+      <tr><td>Processo</td><td>C-12 Timeline</td><td>Etapas adaptadas ao contexto do segmento</td></tr>
+      <tr><td>FAQ</td><td>C-13</td><td>Perguntas específicas do setor (regulatório, escala, prazo)</td></tr>
+      <tr><td>CTA</td><td>C-14 Full</td><td>Copy com linguagem do segmento</td></tr>
+    </table>
+
+    <div class="ds-preview" style="margin-top:32px;">
+      <div class="ds-preview-label">Exemplo de copy para Cooperativas</div>
+      <div class="ds-preview-inner" style="max-width:640px;">
+        <div class="mx-eyebrow"><div class="mx-eyebrow-line"></div><span class="mx-eyebrow-text">Cooperativas e Associações</span></div>
+        <h2 class="mx-h3" style="margin-bottom:16px;">Sua cooperativa precisa transmitir a solidez que o associado espera ver.</h2>
+        <p class="mx-body-lg" style="max-width:540px;">Cooperativas com comunicação visual inconsistente perdem percepção de profissionalismo diante de concorrentes privados. A MIDIAFIX desenvolve padrões visuais corporativos para cooperativas de crédito, agro e saúde — da fachada matriz à unidade mais distante da rede.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script src="assets/js/ui.js" defer></script>
+<script>
+  // Navegação da sidebar — específico desta página de documentação.
+  // (reveal, accordion e nav-scroll vêm de assets/js/ui.js)
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.ds-nav-link').forEach(l => l.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  }
+</script>
+</body>
+</html>

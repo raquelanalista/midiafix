@@ -1,0 +1,107 @@
+/* ════════════════════════════════════════════════════════════
+   MIDIAFIX · DESIGN TOKENS v2.0
+   Fonte única de verdade. Toda cor, tipo, espaço, sombra e raio
+   da marca deriva daqui. Nomes legados (PT / abreviados) são
+   mapeados para estes tokens via shim inline em cada página.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── CORE PALETTE ──────────────────────────────────── */
+  --mx-red:           #E53935;
+  --mx-red-dark:      #C62828;
+  --mx-white:         #F5F5F5;   /* branco primário (único) */
+  --mx-off-white:     #ECECEC;   /* texto longo / superfícies — menos brilho */
+
+  /* ── SURFACE SCALE ─────────────────────────────────── */
+  --mx-grafite-deeper: #070707;  /* hero / primeira dobra — profundidade extra */
+  --mx-surface-0:      #0D0D0D;  /* fundo base do produto */
+  --mx-surface-1:      #111111;
+  --mx-surface-2:      #161616;
+  --mx-surface-3:      #1A1A1A;
+  --mx-surface-4:      #222222;
+  --mx-surface-5:      #2A2A2A;
+
+  /* aliases semânticos de superfície */
+  --mx-grafite:        var(--mx-surface-3);
+  --mx-grafite-mid:    var(--mx-surface-2);
+  --mx-grafite-deep:   var(--mx-surface-0);
+
+  /* ── GRAY SCALE (texto secundário) ─────────────────── */
+  --mx-gray-100:      #4A4A4A;
+  --mx-gray-200:      #666666;
+  --mx-gray-300:      #9E9E9E;   /* normalizado (era 9A9A9A no hero) */
+  --mx-gray-400:      #BDBDBD;
+
+  /* ── BORDER SCALE ──────────────────────────────────── */
+  --mx-border-subtle: #252525;
+  --mx-border-mid:    #2C2C2C;
+  --mx-border-strong: #333333;
+  --mx-border-accent:       rgba(229,57,53,0.25);
+  --mx-border-accent-hover: rgba(229,57,53,0.50);
+
+  /* ── RED OPACITY SCALE ─────────────────────────────── */
+  --mx-red-5:   rgba(229,57,53,0.05);
+  --mx-red-10:  rgba(229,57,53,0.10);
+  --mx-red-15:  rgba(229,57,53,0.15);
+  --mx-red-20:  rgba(229,57,53,0.20);
+
+  /* ── TYPOGRAPHY · FAMILIES ─────────────────────────── */
+  --font-display: 'DM Sans', sans-serif;
+  --font-body:    'IBM Plex Sans', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  /* ── TYPOGRAPHY · SCALE ────────────────────────────── */
+  --text-2xs:  10px;   /* labels / overlines */
+  --text-xs:   11px;
+  --text-sm:   13px;   /* corpo compacto */
+  --text-base: 14px;   /* corpo / botões */
+  --text-md:   16px;
+  --text-lg:   20px;   /* H4 / logo */
+  --text-xl:   clamp(24px, 3.5vw, 32px);   /* H3 */
+  --text-2xl:  clamp(28px, 4vw,   40px);   /* H2 */
+  --text-3xl:  clamp(32px, 4.5vw, 54px);   /* H1 / hero */
+
+  /* ── TYPOGRAPHY · TRACKING ─────────────────────────── */
+  --tracking-tight: -0.02em;   /* títulos display */
+  --tracking-normal: 0.02em;
+  --tracking-wide:  0.06em;
+  --tracking-label: 0.20em;    /* overlines em caixa-alta */
+
+  /* ── SPACING SCALE ─────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-30: 120px;
+
+  /* ── SHADOWS (elevação de card) ────────────────────── */
+  --mx-shadow-card:       0 14px 40px rgba(0,0,0,0.28);
+  --mx-shadow-card-hover: 0 24px 60px rgba(0,0,0,0.40);
+
+  /* ── RADIUS ────────────────────────────────────────── */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+
+  /* ── TRANSITIONS ───────────────────────────────────── */
+  --ease-fast: 0.18s ease;
+  --ease-mid:  0.25s ease;
+  --ease-slow: 0.40s ease;
+
+  /* ── LAYOUT / SECTIONS ─────────────────────────────── */
+  --container-max:        1200px;
+  --container-max-wide:   1440px;
+  --container-max-narrow: 800px;
+  --container-pad:        40px;
+  --container-pad-mobile: 24px;
+  --section-padding:      120px 0;
+  --section-padding-sm:   80px 0;
+}

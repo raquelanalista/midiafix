@@ -1,0 +1,11 @@
+# Infra de preview local (não publicar)
+.claude/
+
+# Documentação interna (não pública)
+DEPLOY.md
+
+# Páginas internas / documentação (não públicas)
+index.html
+midiafix-design-system.html
+midiafix-seo-geo-arquitetura.html
+midiafix-hero-final.html
