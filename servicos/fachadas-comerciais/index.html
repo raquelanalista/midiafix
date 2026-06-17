@@ -336,94 +336,60 @@
 section { padding: 120px 0; }
 @media (max-width: 768px) { section { padding: 80px 0; } }
 
-/* ── Galeria DPL ── */
-.fc-galeria { padding: 80px 0 100px; background: var(--mx-surface-1); }
-.fc-galeria-grid {
+/* ── Projetos Selecionados ── */
+.fc-projetos { padding: 100px 0 120px; background: var(--mx-surface-1); }
+.fc-projetos .mx-section-header { margin-bottom: 64px; }
+.fc-projetos .mx-body-lg { margin-top: 16px; color: var(--mx-text-2); max-width: 540px; }
+.fc-projetos-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-top: 48px;
+  gap: 24px;
 }
-.fc-galeria-item {
-  position: relative;
-  display: block;
-  overflow: hidden;
+.fc-proj-card {
+  background: var(--mx-surface-2);
+  border: 1px solid var(--mx-border);
+  border-radius: var(--radius-md);
+  padding: 36px 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.fc-proj-card:hover {
+  border-color: var(--mx-red);
+  transform: translateY(-2px);
+}
+.fc-proj-icon {
+  width: 44px; height: 44px;
   border-radius: var(--radius-sm);
-  background: var(--mx-surface-3);
-  cursor: pointer;
-  border: none;
-  padding: 0;
-  aspect-ratio: 16/10;
-}
-.fc-galeria-item img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease;
-}
-.fc-galeria-item:hover img { transform: scale(1.04); }
-.fc-galeria-hover {
-  position: absolute; inset: 0;
+  background: rgba(213,0,0,0.08);
+  border: 1px solid rgba(213,0,0,0.15);
   display: flex; align-items: center; justify-content: center;
-  background: rgba(7,7,7,0.45);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  margin-bottom: 4px;
+  flex-shrink: 0;
 }
-.fc-galeria-hover svg { width: 28px; height: 28px; color: #fff; }
-.fc-galeria-item:hover .fc-galeria-hover,
-.fc-galeria-item:focus-visible .fc-galeria-hover { opacity: 1; }
-@media (max-width: 600px) {
-  .fc-galeria-grid { grid-template-columns: 1fr; gap: 6px; }
+.fc-proj-icon svg { width: 22px; height: 22px; color: var(--mx-red); }
+.fc-proj-tag {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mx-red);
 }
-
-/* ── Lightbox ── */
-.fc-lightbox {
-  position: fixed; inset: 0; z-index: 9000;
-  background: rgba(7,7,7,0.96);
-  display: flex; align-items: center; justify-content: center;
-  padding: 24px;
+.fc-proj-card h3 {
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--mx-text-1);
+  margin: 0;
 }
-.fc-lightbox[hidden] { display: none; }
-.fc-lightbox-inner {
-  position: relative;
-  max-width: min(1100px, 100%);
-  max-height: 90vh;
-  display: flex; flex-direction: column; align-items: center; gap: 16px;
+.fc-proj-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--mx-text-2);
+  margin: 0;
 }
-.fc-lightbox-img {
-  max-width: 100%; max-height: 80vh;
-  object-fit: contain;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
-}
-.fc-lightbox-caption {
-  font-size: 13px; color: rgba(245,245,245,0.5);
-  text-align: center; margin: 0;
-}
-.fc-lightbox-close {
-  position: fixed; top: 20px; right: 24px;
-  background: none; border: none; cursor: pointer;
-  font-size: 32px; line-height: 1; color: rgba(245,245,245,0.7);
-  transition: color 0.2s;
-}
-.fc-lightbox-close:hover { color: #fff; }
-.fc-lightbox-prev,
-.fc-lightbox-next {
-  position: fixed; top: 50%; transform: translateY(-50%);
-  background: rgba(245,245,245,0.08);
-  border: 1px solid rgba(245,245,245,0.12);
-  color: rgba(245,245,245,0.8); border-radius: 50%;
-  width: 48px; height: 48px; cursor: pointer;
-  font-size: 20px; display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, color 0.2s;
-}
-.fc-lightbox-prev { left: 16px; }
-.fc-lightbox-next { right: 16px; }
-.fc-lightbox-prev:hover,
-.fc-lightbox-next:hover { background: rgba(245,245,245,0.16); color: #fff; }
-@media (max-width: 600px) {
-  .fc-lightbox-prev { left: 8px; }
-  .fc-lightbox-next { right: 8px; }
+@media (max-width: 768px) {
+  .fc-projetos-grid { grid-template-columns: 1fr; gap: 16px; }
+  .fc-proj-card { padding: 28px 24px 32px; }
 }
 </style>
 </head>
@@ -676,7 +642,7 @@ section { padding: 120px 0; }
       </div>
 
       <div class="mx-img-frame ratio-4-5 reveal">
-        <img loading="lazy" src="../../assets/img/cases/dpl-entrada.jpg" alt="Fachada DPL Distribuidora de Peças — portal em ACM laranja com lettering aplicado e parede perfurada. Projeto MIDIAFIX.">
+        <img loading="lazy" src="../../assets/img/solucao.jpg" alt="Equipe MIDIAFIX em execução de projeto de fachada corporativa — gestão técnica integrada do início ao fim.">
         <div class="mx-img-badge">
           <strong>Gestão técnica integrada</strong>
           <span>Supervisão MIDIAFIX do início ao fim</span>
@@ -747,47 +713,57 @@ section { padding: 120px 0; }
 </section>
 
 
-<!-- ═══ S5b · GALERIA DPL ═════════════════════════════════════ -->
-<section class="fc-galeria" aria-label="Galeria de fotos — DPL Distribuidora de Peças">
+<!-- ═══ S5b · PROJETOS SELECIONADOS ══════════════════════════ -->
+<section class="fc-projetos">
   <div class="mx-container">
 
     <div class="mx-section-header reveal">
-      <p class="mx-eyebrow-text" style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--mx-red);margin-bottom:16px;">Case DPL · Distribuidora de Peças</p>
-      <h2 class="mx-h2">Um projeto. Quatro ângulos.<br>O mesmo padrão em cada detalhe.</h2>
+      <h2 class="mx-h2">Tipos de projetos<br>que executamos</h2>
+      <p class="mx-body-lg">Cada segmento tem suas próprias exigências técnicas, materiais e padrões de entrega. Trabalhamos com todos.</p>
     </div>
 
-    <div class="fc-galeria-grid reveal">
-      <button class="fc-galeria-item" aria-label="Ampliar foto 1 — Vista panorâmica do complexo DPL" data-src="../../assets/img/cases/dpl-panoramica.jpg" data-caption="Vista completa do complexo DPL — totem, galpão e fachada principal">
-        <img loading="lazy" src="../../assets/img/cases/dpl-panoramica.jpg" alt="Vista panorâmica completa do complexo DPL Distribuidora de Peças — projeto MIDIAFIX">
-        <div class="fc-galeria-hover"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </button>
-      <button class="fc-galeria-item" aria-label="Ampliar foto 2 — Vista intermediária" data-src="../../assets/img/cases/dpl-hero.jpg" data-caption="Identidade visual DPL — portal laranja, totem e fachada lateral">
-        <img loading="lazy" src="../../assets/img/cases/dpl-hero.jpg" alt="Vista intermediária da fachada DPL com totem e portal de entrada — projeto MIDIAFIX">
-        <div class="fc-galeria-hover"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </button>
-      <button class="fc-galeria-item" aria-label="Ampliar foto 3 — Entrada principal" data-src="../../assets/img/cases/dpl-entrada.jpg" data-caption="Portal de entrada — ACM laranja, lettering e parede perfurada cinza">
-        <img loading="lazy" src="../../assets/img/cases/dpl-entrada.jpg" alt="Entrada principal da DPL — portal em ACM laranja com lettering e ACM perfurado cinza — projeto MIDIAFIX">
-        <div class="fc-galeria-hover"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </button>
-      <button class="fc-galeria-item" aria-label="Ampliar foto 4 — Detalhe ACM e lettering" data-src="../../assets/img/cases/dpl-detalhe.jpg" data-caption="Detalhe do ACM perfurado e lettering DPL — acabamento e alinhamento verificáveis">
-        <img loading="lazy" src="../../assets/img/cases/dpl-detalhe.jpg" alt="Detalhe do ACM perfurado e lettering DPL — qualidade de acabamento — projeto MIDIAFIX">
-        <div class="fc-galeria-hover"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </button>
+    <div class="fc-projetos-grid reveal">
+
+      <div class="fc-proj-card">
+        <div class="fc-proj-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span class="fc-proj-tag">Supermercados &middot; Grande varejo</span>
+        <h3>Fachadas de escala para pontos de alto tráfego</h3>
+        <p>Projetos com alta exigência de padronização visual, materiais de durabilidade comprovada e instalação que não interrompe a operação.</p>
+      </div>
+
+      <div class="fc-proj-card">
+        <div class="fc-proj-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <span class="fc-proj-tag">Franquias &middot; Redes de lojas</span>
+        <h3>Padronização visual para redes e franquias</h3>
+        <p>Execução com fidelidade ao manual de marca em todas as unidades — independentemente da quantidade de pontos ou da distância geográfica.</p>
+      </div>
+
+      <div class="fc-proj-card">
+        <div class="fc-proj-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <span class="fc-proj-tag">Clínicas &middot; Saúde &middot; Atendimento</span>
+        <h3>Comunicação visual para saúde e atendimento</h3>
+        <p>Projetos que transmitem confiança, organização e padrão técnico antes do primeiro contato — em clínicas, consultórios, hospitais e laboratórios.</p>
+      </div>
+
+      <div class="fc-proj-card">
+        <div class="fc-proj-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <span class="fc-proj-tag">Cooperativas &middot; Indústria &middot; Logística</span>
+        <h3>Identidade corporativa para operações de grande porte</h3>
+        <p>Fachadas e sinalização com durabilidade para alta exposição externa — para galpões, plantas industriais e complexos distribuídos.</p>
+      </div>
+
     </div>
 
   </div>
 </section>
-
-<!-- Lightbox DPL -->
-<div id="fc-lightbox" class="fc-lightbox" role="dialog" aria-modal="true" aria-label="Visualização ampliada" hidden>
-  <button class="fc-lightbox-close" aria-label="Fechar">&times;</button>
-  <button class="fc-lightbox-prev" aria-label="Foto anterior">&#8592;</button>
-  <button class="fc-lightbox-next" aria-label="Próxima foto">&#8594;</button>
-  <div class="fc-lightbox-inner">
-    <img src="" alt="" class="fc-lightbox-img">
-    <p class="fc-lightbox-caption"></p>
-  </div>
-</div>
 
 
 <!-- ═══ S6 · CASE EXCLUSIVO MUFFATÃO ══════════════════════════ -->
@@ -1364,55 +1340,6 @@ section { padding: 120px 0; }
 </footer>
 
 <script src="../../assets/js/ui.js"></script>
-<script>
-/* ── Lightbox Galeria DPL ── */
-(function () {
-  const lb      = document.getElementById('fc-lightbox');
-  const lbImg   = lb.querySelector('.fc-lightbox-img');
-  const lbCap   = lb.querySelector('.fc-lightbox-caption');
-  const lbClose = lb.querySelector('.fc-lightbox-close');
-  const lbPrev  = lb.querySelector('.fc-lightbox-prev');
-  const lbNext  = lb.querySelector('.fc-lightbox-next');
-  const items   = [...document.querySelectorAll('.fc-galeria-item')];
-  let current   = 0;
-
-  function open(index) {
-    current = index;
-    const btn = items[index];
-    lbImg.src = btn.dataset.src;
-    lbImg.alt = btn.querySelector('img').alt;
-    lbCap.textContent = btn.dataset.caption || '';
-    lb.hidden = false;
-    document.body.style.overflow = 'hidden';
-    lbClose.focus();
-  }
-
-  function close() {
-    lb.hidden = true;
-    document.body.style.overflow = '';
-    items[current].focus();
-  }
-
-  function go(dir) {
-    current = (current + dir + items.length) % items.length;
-    open(current);
-  }
-
-  items.forEach((btn, i) => btn.addEventListener('click', () => open(i)));
-  lbClose.addEventListener('click', close);
-  lbPrev.addEventListener('click', () => go(-1));
-  lbNext.addEventListener('click', () => go(1));
-
-  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
-
-  document.addEventListener('keydown', (e) => {
-    if (lb.hidden) return;
-    if (e.key === 'Escape')    close();
-    if (e.key === 'ArrowLeft') go(-1);
-    if (e.key === 'ArrowRight') go(1);
-  });
-})();
-</script>
 
 </body>
 </html>
