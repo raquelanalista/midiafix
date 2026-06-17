@@ -180,8 +180,14 @@
   border-radius: 50%;
   background: var(--mx-red);
 }
+/* layout invertido: texto esq, foto dir */
+.fc-destaque-inner--reverse .fc-destaque-img  { order: 2; }
+.fc-destaque-inner--reverse .fc-destaque-body { order: 1; }
+
 @media (max-width: 900px) {
   .fc-destaque-inner { grid-template-columns: 1fr; }
+  .fc-destaque-inner--reverse .fc-destaque-img  { order: unset; }
+  .fc-destaque-inner--reverse .fc-destaque-body { order: unset; }
   .fc-destaque-img { min-height: 320px; }
   .fc-destaque-body { padding: 40px 32px; }
 }
@@ -868,6 +874,37 @@ section { padding: 120px 0; }
           <li>Totem de sinalização externo</li>
           <li>Gestão técnica do projeto ao início ao fim</li>
         </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ S5d · CASE EM DESTAQUE — COPACOL ════════════════════════ -->
+<section class="fc-destaque">
+  <div class="mx-container">
+    <div class="fc-destaque-inner fc-destaque-inner--reverse reveal">
+
+      <div class="fc-destaque-body">
+        <span class="mx-tag">Cooperativas &middot; Ind&uacute;stria &middot; Agroneg&oacute;cio</span>
+        <h3 class="mx-h3">Copacol</h3>
+        <p class="mx-body">Projeto corporativo de fachada e comunicação visual para uma das maiores cooperativas do Paraná. Aplicação de letra caixa em grande formato e grafismo identitário em estrutura industrial de alta escala.</p>
+        <ul class="fc-destaque-itens">
+          <li>Fachada corporativa de grande porte</li>
+          <li>Letra caixa em grande formato com identidade da marca</li>
+          <li>Grafismo colorido aplicado à fachada industrial</li>
+          <li>Gestão técnica do projeto do início ao fim</li>
+        </ul>
+      </div>
+
+      <div class="fc-destaque-img">
+        <img
+          loading="lazy"
+          src="../../assets/img/cases/copacol-fachada.jpg"
+          alt="Fachada Copacol Unidade Refrigerada de Sementes — letra caixa corporativa e grafismo identitário em estrutura industrial. Projeto MIDIAFIX."
+          style="object-position: 35% center;"
+        >
       </div>
 
     </div>
