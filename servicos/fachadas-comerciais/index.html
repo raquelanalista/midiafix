@@ -387,9 +387,32 @@ section { padding: 120px 0; }
   color: var(--mx-text-2);
   margin: 0;
 }
+/* ── Card com foto real (destaque) ── */
+.fc-proj-card--photo {
+  padding-top: 0;
+  padding-bottom: 32px;
+  overflow: hidden;
+}
+.fc-proj-img {
+  margin: 0 -32px 24px;
+  height: 340px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.fc-proj-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.fc-proj-card--photo:hover .fc-proj-img img { transform: scale(1.04); }
 @media (max-width: 768px) {
   .fc-projetos-grid { grid-template-columns: 1fr; gap: 16px; }
   .fc-proj-card { padding: 28px 24px 32px; }
+  .fc-proj-card--photo { padding-bottom: 28px; }
+  .fc-proj-img { margin: 0 -24px 20px; height: 260px; }
 }
 </style>
 </head>
@@ -742,13 +765,17 @@ section { padding: 120px 0; }
         <p>Execução com fidelidade ao manual de marca em todas as unidades — independentemente da quantidade de pontos ou da distância geográfica.</p>
       </div>
 
-      <div class="fc-proj-card">
-        <div class="fc-proj-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <div class="fc-proj-card fc-proj-card--photo">
+        <div class="fc-proj-img">
+          <img
+            loading="lazy"
+            src="../../assets/img/cases/ginoferty-fachada.jpg"
+            alt="Fachada Ginoferty Centro de Reprodução Humana — ACM amadeirado, letra caixa iluminada e logomarca em posição de destaque. Projeto MIDIAFIX."
+          >
         </div>
         <span class="fc-proj-tag">Clínicas &middot; Saúde &middot; Atendimento</span>
-        <h3>Comunicação visual para saúde e atendimento</h3>
-        <p>Projetos que transmitem confiança, organização e padrão técnico antes do primeiro contato — em clínicas, consultórios, hospitais e laboratórios.</p>
+        <h3>Ginoferty — Centro de Reprodução Humana</h3>
+        <p>Projeto de comunicação visual combinando ACM amadeirado, letra caixa e sinalização para transmitir credibilidade, acolhimento e posicionamento premium.</p>
       </div>
 
       <div class="fc-proj-card">
