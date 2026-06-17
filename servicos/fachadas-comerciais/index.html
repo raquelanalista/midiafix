@@ -119,6 +119,77 @@
   background-position: center 42%;
 }
 
+/* ── Case em Destaque (Alt 2) ── */
+.fc-destaque { padding: 0 0 120px; background: var(--mx-surface-1); }
+.fc-destaque-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--mx-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.fc-destaque-img {
+  position: relative;
+  min-height: 520px;
+}
+.fc-destaque-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+.fc-destaque-body {
+  padding: 56px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  background: var(--mx-surface-2);
+}
+.fc-destaque-body .mx-h3 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.25;
+  margin: 0;
+}
+.fc-destaque-body .mx-body {
+  color: var(--mx-text-2);
+  margin: 0;
+}
+.fc-destaque-itens {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--mx-border);
+  padding-top: 20px;
+  margin-top: 4px;
+}
+.fc-destaque-itens li {
+  font-size: 14px;
+  color: var(--mx-text-2);
+  padding-left: 16px;
+  position: relative;
+}
+.fc-destaque-itens li::before {
+  content: '';
+  position: absolute; left: 0; top: 8px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--mx-red);
+}
+@media (max-width: 900px) {
+  .fc-destaque-inner { grid-template-columns: 1fr; }
+  .fc-destaque-img { min-height: 320px; }
+  .fc-destaque-body { padding: 40px 32px; }
+}
+@media (max-width: 600px) {
+  .fc-destaque-img { min-height: 260px; }
+  .fc-destaque-body { padding: 32px 24px; gap: 16px; }
+}
+
 /* ── S6 Muffatão ── */
 .fc-muffatao {
   position: relative;
@@ -387,32 +458,9 @@ section { padding: 120px 0; }
   color: var(--mx-text-2);
   margin: 0;
 }
-/* ── Card com foto real (destaque) ── */
-.fc-proj-card--photo {
-  padding-top: 0;
-  padding-bottom: 32px;
-  overflow: hidden;
-}
-.fc-proj-img {
-  margin: 0 -32px 24px;
-  height: 340px;
-  overflow: hidden;
-  position: relative;
-  flex-shrink: 0;
-}
-.fc-proj-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  display: block;
-  transition: transform 0.6s ease;
-}
-.fc-proj-card--photo:hover .fc-proj-img img { transform: scale(1.04); }
 @media (max-width: 768px) {
   .fc-projetos-grid { grid-template-columns: 1fr; gap: 16px; }
   .fc-proj-card { padding: 28px 24px 32px; }
-  .fc-proj-card--photo { padding-bottom: 28px; }
-  .fc-proj-img { margin: 0 -24px 20px; height: 260px; }
 }
 </style>
 </head>
@@ -765,17 +813,13 @@ section { padding: 120px 0; }
         <p>Execução com fidelidade ao manual de marca em todas as unidades — independentemente da quantidade de pontos ou da distância geográfica.</p>
       </div>
 
-      <div class="fc-proj-card fc-proj-card--photo">
-        <div class="fc-proj-img">
-          <img
-            loading="lazy"
-            src="../../assets/img/cases/ginoferty-fachada.jpg"
-            alt="Fachada Ginoferty Centro de Reprodução Humana — ACM amadeirado, letra caixa iluminada e logomarca em posição de destaque. Projeto MIDIAFIX."
-          >
+      <div class="fc-proj-card">
+        <div class="fc-proj-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <span class="fc-proj-tag">Clínicas &middot; Saúde &middot; Atendimento</span>
-        <h3>Ginoferty — Centro de Reprodução Humana</h3>
-        <p>Projeto de comunicação visual combinando ACM amadeirado, letra caixa e sinalização para transmitir credibilidade, acolhimento e posicionamento premium.</p>
+        <h3>Comunicação visual para saúde e atendimento</h3>
+        <p>Projetos que transmitem confiança, organização e padrão técnico antes do primeiro contato — em clínicas, consultórios, hospitais e laboratórios.</p>
       </div>
 
       <div class="fc-proj-card">
@@ -789,6 +833,36 @@ section { padding: 120px 0; }
 
     </div>
 
+  </div>
+</section>
+
+
+<!-- ═══ S5c · CASE EM DESTAQUE — GINOFERTY ═══════════════════ -->
+<section class="fc-destaque">
+  <div class="mx-container">
+    <div class="fc-destaque-inner reveal">
+
+      <div class="fc-destaque-img">
+        <img
+          loading="lazy"
+          src="../../assets/img/cases/ginoferty-fachada.jpg"
+          alt="Fachada Ginoferty Centro de Reprodução Humana — ACM amadeirado, letra caixa e acesso principal. Projeto MIDIAFIX."
+        >
+      </div>
+
+      <div class="fc-destaque-body">
+        <span class="mx-tag">Clínicas &middot; Saúde &middot; Cascavel&ndash;PR</span>
+        <h3 class="mx-h3">Ginoferty — Centro de Reprodução Humana</h3>
+        <p class="mx-body">Projeto de comunicação visual combinando ACM amadeirado, letra caixa e sinalização para transmitir credibilidade, acolhimento e posicionamento premium.</p>
+        <ul class="fc-destaque-itens">
+          <li>ACM amadeirado na fachada curva</li>
+          <li>Letra caixa iluminada com identidade da marca</li>
+          <li>Totem de sinalização externo</li>
+          <li>Gestão técnica do projeto ao início ao fim</li>
+        </ul>
+      </div>
+
+    </div>
   </div>
 </section>
 
